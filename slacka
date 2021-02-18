@@ -15,13 +15,16 @@ BEGIN{
   config()
   
   if (ARGC == 1) {
-    print "Usage:\n  slacka users | chans | cfg"
-    print "  slacka <channel> [ <thread_id> ]    where <channel> in:"
+    print "Usage:\n  Maintenance: slacka users | chans | cfg"
+    print "  Read:        slacka <channel> [ <thread_id> ]    "\
+      "where <channel> is:"
     PROCINFO["sorted_in"] = "@ind_str_asc"
-    printf "       "
+    printf "         "
     for (i in ChanID)
       printf "%s, ", i
     print ""
+    print "  Write:       slacka <channel> [ new | <thread_id> ]"\
+      " \"your message\""
 
     exit 0
   }

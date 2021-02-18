@@ -1,0 +1,37 @@
+{
+    "teams" : 
+    [
+        {
+            "id"  : "TXXXX1",
+            "note" : "First team",
+            "token" : "xoxp-...",
+            "channels" :
+            [
+                {
+                    "label" :  "c1",
+                    "note"  :  "First Channel",
+                    "id" : "CXXXX1"
+                },
+                {
+                    "label" :  "c2",
+                    "note"  :  "Second Channel",
+                    "id" : "CXXXX2"
+                }
+            ]
+        },
+        {
+            "id"  : "TXXXX2",
+            "note" : "Second team",
+            "token" : "xoxp-...",
+            "channels" :
+            [
+                {
+                    "label" :  "c3",
+                    "note"  :  "Third Channel",
+                    "id" : "CXXXX3"
+                }
+            ]
+        }
+    ]
+}
+
