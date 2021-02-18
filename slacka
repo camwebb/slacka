@@ -1,43 +1,46 @@
 #!/usr/bin/gawk -f
 
-# Scopes needed:
-#  channels:history
-#  channels:read
-#  groups:history   # private channels
-#  groups:read      # private channels
-#  users:read       # user names
-#  chat:write       # posting
+# Slacka: an Awk (Gawk) client for Slack
+# https://github.com/camwebb/slacka
+# (c) Cam Webb <cw@camwebb.info>
+# License: The Unlicense <http://unlicense.org/>
 
 @load "json" 
 
 BEGIN{
 
+  if ((ARGC == 2) && (ARGV[1] == "cfg")) {
+    system("emacs " ENVIRON["HOME"] "/.config/slacka/config.json")
+    exit 0
+  }
+
   config()
   
   if (ARGC == 1) {
-    print "Usage:\n  Maintenance: slacka users | chans | cfg"
+    print "Usage:\n  Maintenance: slacka users | chans | cfg "
+    print "  Check:       slacka ck"
     print "  Read:        slacka <channel> [ <thread_id> ]    "\
       "where <channel> is:"
     PROCINFO["sorted_in"] = "@ind_str_asc"
-    printf "         "
+    printf "    "
     for (i in ChanID)
-      printf "%s, ", i
+      printf "%s ", i
     print ""
     print "  Write:       slacka <channel> [ new | <thread_id> ]"\
       " \"your message\""
-
     exit 0
   }
-  
+
   else if (ARGC == 2) {
+    # admin functions
     if (ARGV[1] == "users")
       make_users()
     else if (ARGV[1] == "chans")
       list_channels()
-    else if (ARGV[1] == "cfg") {
-      system("emacs " ENVIRON["HOME"] "/.config/slacka/config.json")
-      exit 0
-    }
+    else if (ARGV[1] == "ck")
+      ck_new()
+
+    # calling a channel
     else if (!ChanID[ARGV[1]]) {
       print "No such channel label" > "/dev/stderr"
       exit 1
@@ -51,6 +54,7 @@ BEGIN{
   
   else if (ARGC == 3) {
     if (!ChanID[ARGV[1]]) {
+      # this will catch a "new" post without text
       print "No such channel label" > "/dev/stderr"
       exit 1
     }
@@ -71,6 +75,8 @@ BEGIN{
     }
   }
 
+  else
+    exit 1
 }
 
 function post(team, channel, ts, text      ) {
@@ -251,8 +257,8 @@ function config(    json, data, i, j) {
     Token[data["teams"][i]["id"]] = data["teams"][i]["token"]
     
     for (j in data["teams"][i]["channels"]) {
-      if (data["teams"][i]["channels"][j]["label"] ~ /^(users|chans|cfg)%/) {
-        print "Protected labels: '" data["teams"][i]["channels"][j]["label"]\
+      if (data["teams"][i]["channels"][j]["label"] ~ /^(users|chans|cfg|ck)%/) {
+        print "Protected label: '" data["teams"][i]["channels"][j]["label"]\
           "'" > "/dev/stderr"
         exit 1
       }
@@ -309,4 +315,79 @@ function make_users(    json, data, name, i, j) {
   print json > (ENVIRON["HOME"] "/.config/slacka/users.json")
   print "Users updated successfully"
   exit 0
+}
+
+function ck_new(     status, i , cmd, label, new, newest, replies, json, \
+                     data, newestrep) {
+
+  RS="\x04";
+  PROCINFO["sorted_in"] = "@ind_str_asc"
+  printf "(Checking:" 
+  for (i in ChanID) {
+    printf " %s", i 
+    label[ChanID[i]] = i
+    cmd = "curl -L -s "                                                 \
+      "-H 'Authorization: Bearer " Token[ChanTeam[i]]  "' "             \
+      "'https://slack.com/api/conversations.history?channel=" ChanID[i] "'"
+    cmd | getline json
+    if (! json_fromJSON(json, data)) {
+      print "JSON import failed!" > "/dev/stderr"
+      exit 1
+    }
+
+    # find the ts of the newset post:
+    newest[ChanID[i]] = data["messages"][1]["ts"]
+    if (data["messages"][1]["reply_count"])
+      newestrep[ChanID[i]] = data["messages"][1]["reply_count"]
+    else
+      newestrep[ChanID[i]] = 0
+    # for all posts in channel, make array of replies indexed by ts of post 
+    for (j in data["messages"]) { 
+      if (data["messages"][j]["reply_count"])
+        replies[ChanID[i]][data["messages"][j]["ts"]] = \
+          data["messages"][j]["reply_count"]
+      else
+        replies[ChanID[i]][data["messages"][j]["ts"]] = 0
+    }
+  }
+  printf ")\n"
+  
+  # test for latest.json
+  "test -e " ENVIRON["HOME"] "/.config/slacka/latest.json ; echo $?"    \
+    | getline status
+  if (status) {
+    print "Making initial " ENVIRON["HOME"] "/.config/slacka/latest.json"
+  }
+  else {
+    getline json < (ENVIRON["HOME"] "/.config/slacka/latest.json")
+    if (! json_fromJSON(json, data)) {
+      print "JSON import failed."
+      exit 1
+    }
+
+    for (i in data)
+      # is there either a new post, or a new reply to the last stored post
+      if ((data[i]["ts"] < newest[data[i]["id"]]) ||    \
+          (data[i]["replies"] < replies[data[i]["id"]][data[i]["ts"]]))
+        new[label[data[i]["id"]]]++
+    
+    if (isarray(new)) {
+      printf "New posts/replies in: "
+      for (i in new)
+        list = list " " i
+      printf "%s\n", list
+    }
+    else
+      print "No new posts/replies"
+  }
+
+  # update latest.json
+  json = "["
+  for (i in newest)
+    json = json "{\"id\":\"" i "\",\"ts\":\"" newest[i] "\",\"replies\":\"" \
+      newestrep[i] "\"},"
+  gsub(/.$/,"]",json)
+  print json > (ENVIRON["HOME"] "/.config/slacka/latest.json")
+  exit 0
+  
 }

@@ -5,8 +5,10 @@
 ### Dependencies
 
  * `gawk`
- * [`gawkextlib`](https://sourceforge.net/p/gawkextlib/)
- * `gawk-json`
+ * [`gawk-json`](https://sourceforge.net/p/gawkextlib/) (Build from
+   [source](https://sourceforge.net/p/gawkextlib/), or: Arch AUR:
+   `gawk-json`)
+ * `curl`
 
 ### OAuth Tokens
 
@@ -63,4 +65,5 @@ procedure:
  * To post a new message to the channel: `slacka <channel> new "your message"`
  * To post a message to a thread: `slacka <channel> <thread_id> "your
    message"` (e.g.: `slacka news 1610131196.000800 "I agree!"`)
-
+ * To check for new posts in the channel, or new replies to the most
+   recent post: `slacka ck`.
