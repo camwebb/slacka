@@ -13,11 +13,14 @@ BEGIN{
     system("emacs " ENVIRON["HOME"] "/.config/slacka/config.json")
     exit 0
   }
+  else if ((ARGC == 2) && (ARGV[1] == "auth")) {
+    auth()
+  }
 
   config()
   
   if (ARGC == 1) {
-    print "Usage:\n  Maintenance: slacka users | chans | cfg "
+    print "Usage:\n  Maintenance: slacka auth | cfg | users | chans "
     print "  Check:       slacka ck"
     print "  Read:        slacka <channel> [ <thread_id> ]    "\
       "where <channel> is:"
@@ -257,7 +260,7 @@ function config(    json, data, i, j) {
     Token[data["teams"][i]["id"]] = data["teams"][i]["token"]
     
     for (j in data["teams"][i]["channels"]) {
-      if (data["teams"][i]["channels"][j]["label"] ~ /^(users|chans|cfg|ck)%/) {
+      if (data["teams"][i]["channels"][j]["label"] ~ /^(users|chans|cfg|ck|auth)%/) {
         print "Protected label: '" data["teams"][i]["channels"][j]["label"]\
           "'" > "/dev/stderr"
         exit 1
@@ -391,3 +394,64 @@ function ck_new(     status, i , cmd, label, new, newest, replies, json, \
   exit 0
   
 }
+
+function auth(   cmd) {
+
+  # App setup (2021-02-19):
+  #   1. Create app in a workspace, copy client ID and client secret 
+  #   2. Add permissions -> User scopes: channels:history, channels:read,
+  #        groups:history, groups:read, users:read, calls:write
+  #   3. Add dummy redirect URL (e.g., https://example.com/path )
+  #   4. Confirm hardcode review
+  #   5. Distribute
+  # App can now be used in any authorized workspace
+
+  clientid       = "234851842290.1757541358103"
+  clientsecret  = "0832b70040d2f885716185fa190d7b5d"
+  
+  print "In your browser, log in to a Slack workspace, then go to this URL:" \
+    "\n\n   https://slack.com/oauth/v2/authorize?"                        \
+    "client_id=" clientid "&user_scope=channels:history,"\
+    "channels:read,groups:history,groups:read,users:read,calls:write\n"
+  print "After authorizing a workspace, examine the URL in the redirect, and"  
+  print "paste the code string after 'code=' and before '&state='"
+  printf " : "
+  RS="\n";
+  getline code < "-"
+
+  RS="\x04";
+  cmd = "curl -s "                                                      \
+    "'https://slack.com/api/oauth.v2.access?code=" code                 \
+    "&client_id=" clientid                                              \
+    "&client_secret=" clientsecret   "'"
+  cmd | getline json
+  if (! json_fromJSON(json, data)) {
+    print "JSON import failed!" > "/dev/stderr"
+    exit 1
+  }
+
+  if (!data["ok"] == "true") {
+    print "Authorization failed."
+    exit 1
+  }
+  
+  print "\nNow enter JSON into the slacka config.json file, below team:"
+  print "{"
+  print "  \"id\"    : \"" data["team"]["id"] "\","
+  print "  \"name\"  : \"" data["team"]["name"] "\","
+  print "  \"token\" : \"" data["authed_user"]["access_token"] "\","
+  print "  \"channels\" :"
+  print "  ["
+  print "    {"
+  print "      \"label\" :  \"foo\","
+  print "      \"name\"  :  \"Dummy\","
+  print "      \"id\"    :  \"CXXXXXX\""
+  print "    }"
+  print "  ]"
+  print "}"
+
+  exit 0
+
+}
+
+
