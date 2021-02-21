@@ -22,15 +22,15 @@ BEGIN{
   if (ARGC == 1) {
     print "Usage:\n  Maintenance: slacka auth | cfg | users | chans "
     print "  Check:       slacka ck"
-    print "  Read:        slacka <channel> [ <thread_id> ]    "\
-      "where <channel> is:"
+    print "  Read:        slacka <channel> [ <thread_id> ]    "
+    print "  Write:       slacka <channel> [ new | <thread_id> ]"\
+      " \"your message\""
+    print "  Search:      slacka <channel>  find  \"search term\""
+    printf "    Chans: "
     PROCINFO["sorted_in"] = "@ind_str_asc"
-    printf "    "
     for (i in ChanID)
       printf "%s ", i
     print ""
-    print "  Write:       slacka <channel> [ new | <thread_id> ]"\
-      " \"your message\""
     exit 0
   }
 
@@ -57,7 +57,7 @@ BEGIN{
   
   else if (ARGC == 3) {
     if (!ChanID[ARGV[1]]) {
-      # this will catch a "new" post without text
+      # this will catch a "new" or "find" post without text
       print "No such channel label" > "/dev/stderr"
       exit 1
     }
@@ -72,6 +72,10 @@ BEGIN{
     if (!ChanID[ARGV[1]]) {
       print "No such channel label" > "/dev/stderr"
       exit 1
+    }
+    else if (ARGV[2] == "find") {
+      read_users()
+      find(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[3])
     }
     else {
       post(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[2], ARGV[3])
@@ -213,7 +217,7 @@ function list_channels(  cmd, json, data, i) {
     }
     # walk_array(data, "data");
 
-    print "TEAM: " c
+    print "TEAM: " TName[c] " (" c ")"  
     for (i in data["channels"]) 
       printf "  %-12s : %-50s (priv=%s)\n", data["channels"][i]["id"], \
         data["channels"][i]["name"] , data["channels"][i]["is_private"]
@@ -258,9 +262,10 @@ function config(    json, data, i, j) {
   # Todo: add error checking
   for (i in data["teams"]) {
     Token[data["teams"][i]["id"]] = data["teams"][i]["token"]
+    TName[data["teams"][i]["id"]] = data["teams"][i]["name"]
     
     for (j in data["teams"][i]["channels"]) {
-      if (data["teams"][i]["channels"][j]["label"] ~ /^(users|chans|cfg|ck|auth)%/) {
+      if (data["teams"][i]["channels"][j]["label"] ~ /^(users|chans|cfg|ck|auth|find)%/) {
         print "Protected label: '" data["teams"][i]["channels"][j]["label"]\
           "'" > "/dev/stderr"
         exit 1
@@ -273,8 +278,13 @@ function config(    json, data, i, j) {
       else {
         ChanID[data["teams"][i]["channels"][j]["label"]] =  \
           data["teams"][i]["channels"][j]["id"]
+
         ChanTeam[data["teams"][i]["channels"][j]["label"]] =    \
           data["teams"][i]["id"]
+
+        if (typeof(data["teams"][i]["channels"][j]["check"]) == "number")
+          if (!data["teams"][i]["channels"][j]["check"])
+            Skip[data["teams"][i]["channels"][j]["label"]] = 1
       }
     }
   }
@@ -320,13 +330,15 @@ function make_users(    json, data, name, i, j) {
   exit 0
 }
 
-function ck_new(     status, i , cmd, label, new, newest, replies, json, \
-                     data, newestrep) {
+function ck_new(     status, i , cmd, label, newr, newp, newest, replies, \
+                     json, data, newestrep) {
 
   RS="\x04";
   PROCINFO["sorted_in"] = "@ind_str_asc"
   printf "(Checking:" 
   for (i in ChanID) {
+    if (Skip[i])
+      continue
     printf " %s", i 
     label[ChanID[i]] = i
     cmd = "curl -L -s "                                                 \
@@ -368,19 +380,28 @@ function ck_new(     status, i , cmd, label, new, newest, replies, json, \
       exit 1
     }
 
-    for (i in data)
+    for (i in data) {
       # is there either a new post, or a new reply to the last stored post
-      if ((data[i]["ts"] < newest[data[i]["id"]]) ||    \
-          (data[i]["replies"] < replies[data[i]["id"]][data[i]["ts"]]))
-        new[label[data[i]["id"]]]++
+      if (data[i]["ts"] < newest[data[i]["id"]])
+        newp[label[data[i]["id"]]]++
+      if (data[i]["replies"] < replies[data[i]["id"]][data[i]["ts"]])
+        newr[label[data[i]["id"]]]++
+    }
     
-    if (isarray(new)) {
-      printf "New posts/replies in: "
-      for (i in new)
+    if (isarray(newp)) {
+      printf "New posts: "
+      for (i in newp)
+        list = list " " i
+      printf "%s\n", list
+      list = ""
+    }
+    if (isarray(newr)) {
+      printf "New replies in: "
+      for (i in newr)
         list = list " " i
       printf "%s\n", list
     }
-    else
+    if (!isarray(newr) && !isarray(newp))
       print "No new posts/replies"
   }
 
@@ -406,6 +427,12 @@ function auth(   cmd) {
   #   5. Distribute
   # App can now be used in any authorized workspace
 
+  # YES! there is a 'secret' revealed here. But without the CODE,
+  #   generated during the user permission phase, and the subsequent
+  #   TOKEN, there is no way for a third party to eavesdrop or post as a user.
+  # See: https://github.com/wee-slack/wee-slack/wee_slack.py
+  #      https://github.com/erroneousboat/slack-term/wiki
+  
   clientid       = "234851842290.1757541358103"
   clientsecret  = "0832b70040d2f885716185fa190d7b5d"
   
@@ -454,4 +481,32 @@ function auth(   cmd) {
 
 }
 
+function find(team, channel, query,     cmd, json, data) {
+  RS="\x04";
+  cmd = "curl -s "                                                      \
+    "-H 'Authorization: Bearer " Token[team]  "' "         \
+    "'https://slack.com/api/search.messages?query=" query "'" 
+  cmd | getline json
+  if (! json_fromJSON(json, data)) {
+    print "JSON import failed!" > "/dev/stderr"
+    exit 1
+  }
 
+  PROCINFO["sorted_in"] = "@ind_num_desc"
+  for (i in data["messages"]["matches"]) {
+    if (data["messages"]["matches"][i]["channel"]["id"] == channel) {
+      
+      if (Name[data["messages"]["matches"][i]["user"]])
+        name = Name[data["messages"]["matches"][i]["user"]]
+      else
+        name = data["messages"]["matches"][i]["user"]
+      print "\x1b[38;5;11m" "<" name "> " "\x1b[0;m"                \
+        strftime("[%m-%d %a %H:%M] ",data["messages"]["matches"][i]["ts"]) \
+        " ( " data["messages"]["matches"][i]["ts"] " )\n" 
+      msg = gensub(/\n/," // ", "G", data["messages"]["matches"][i]["text"])
+      msg_block(msg)
+      print ""
+    }
+  }
+}
+  
