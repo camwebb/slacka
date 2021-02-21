@@ -86,7 +86,8 @@ BEGIN{
     exit 1
 }
 
-function post(team, channel, ts, text      ) {
+function post(team, channel, ts, text,      cmd, json, data, newts, \
+              status, lts, lrep) {
   cmd = "curl -X POST -L -s "                                     \
     "-H 'Authorization: Bearer " Token[team]  "' "                \
     "-H 'Content-type: application/x-www-form-urlencoded' "       \
@@ -105,14 +106,56 @@ function post(team, channel, ts, text      ) {
     exit 1
   }
 
-  if (data["ok"] == 1) {
-    print "Success"
-    exit 0
-  }
-  else {
+  if (!data["ok"]) {
     print "Posting failed"
+    walk_array(data, "data");
     exit 1
   }
+  print "Success"
+
+  if (ts == "new")
+    newts = data["ts"]
+
+  # update latest.json - TODO, make this a function
+  # test for latest.json
+  "test -e " ENVIRON["HOME"] "/.config/slacka/latest.json ; echo $?"    \
+    | getline status
+  if (status) {
+    print "No latest.json file. Generate with slacka ck"
+    exit 1
+  }
+  
+  getline json < (ENVIRON["HOME"] "/.config/slacka/latest.json")
+  if (! json_fromJSON(json, data)) {
+    print "JSON import failed."
+    exit 1
+  }
+
+  for (i in data) {
+    lts[data[i]["id"]] = data[i]["ts"]
+    lrep[data[i]["id"]] = data[i]["replies"]
+  }
+
+  for (i in lts) {
+    # if a new thread was started, register it
+    if (newts) {
+      lts[i] = newts
+      lrep[i] = 0
+    }
+    # else if the new reply was to the last thread
+    else if (lts[i] == ts) 
+      lrep[i]++
+  }
+
+  # update latest.json
+  json = "["
+  for (i in lts)
+    json = json "{\"id\":\"" i "\",\"ts\":\"" lts[i] "\",\"replies\":\"" \
+      lrep[i] "\"},"
+  gsub(/.$/,"]",json)
+  print json > (ENVIRON["HOME"] "/.config/slacka/latest.json")
+  
+  exit 0
 }
 
 function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i) {
@@ -335,7 +378,7 @@ function ck_new(     status, i , cmd, label, newr, newp, newest, replies, \
 
   RS="\x04";
   PROCINFO["sorted_in"] = "@ind_str_asc"
-  printf "(Checking:" 
+  printf "Checking:" 
   for (i in ChanID) {
     if (Skip[i])
       continue
@@ -365,7 +408,7 @@ function ck_new(     status, i , cmd, label, newr, newp, newest, replies, \
         replies[ChanID[i]][data["messages"][j]["ts"]] = 0
     }
   }
-  printf ")\n"
+  printf "\n"
   
   # test for latest.json
   "test -e " ENVIRON["HOME"] "/.config/slacka/latest.json ; echo $?"    \
@@ -439,7 +482,8 @@ function auth(   cmd) {
   print "In your browser, log in to a Slack workspace, then go to this URL:" \
     "\n\n   https://slack.com/oauth/v2/authorize?"                        \
     "client_id=" clientid "&user_scope=channels:history,"\
-    "channels:read,groups:history,groups:read,users:read,calls:write\n"
+    "channels:read,groups:history,groups:read,users:read,"\
+    "chat:write,search:read\n"
   print "After authorizing a workspace, examine the URL in the redirect, and"  
   print "paste the code string after 'code=' and before '&state='"
   printf " : "
