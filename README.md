@@ -44,12 +44,12 @@ single workspace:
    Workspace/Team.
  * ‘Add features and functionality’ -> ‘Permissions’ -> ‘Scopes’ ->
    ‘User Token Scopes’ -> ‘Add an OAuth Scope’ and add:
-    * `channels:history`
-    * `channels:read`
-    * `groups:history` (for your private channels)
-    * `groups:read`
+    * `{channels & groups}:history` (groups are prival channels)
+    * `{channels & groups}:read`
     * `users:read` (see user names)
     * `chat:write` (for posting)
+    * `search:read` (search)
+    * `{im & mpim}:{read & history & write}` (for DMs)
  * ‘Install to Workspace’. Note that the Admins for your Workspace may
    have restricted users ability to add Apps, in which case you’ll
    need to ask ‘Request’ installation to Workspace. Also, free Slack
@@ -88,16 +88,20 @@ workspaces) are:
    all teams). If you later see that some (new) users in a team are
    appearing as `<UXXXXX>` re-run `slacka users` to regenerate the
    cache.
- * Plain `slacka` will give you usage and a list of available channels
- * To see the ten most recent threads in a channel, and their initial
+ * Plain `slacka` will give you usage and a list of available
+   channels. Add these channel IDs to the config file. Note: DMs are
+   treated just as other channels (`DXXX` and `GXXX`).
+ * To see the ten most recent threads in a channel/DM, and the initial
    post: `slacka <channel>`
- * To read all posts in a thread: `slacka <channel> <thread_id>`,
+ * To read all replies in a thread: `slacka <channel> <thread_id>`,
    where `<thread_id>` is the numeric code in the heading for each
    thread (actually a time stamp).
- * To post a new message to the channel: `slacka <channel> new "your message"`
+ * To post a new message to the channel (and to the DM): `slacka
+   <channel> new "your message"`
  * To post a message to a thread: `slacka <channel> <thread_id> "your
    message"` (e.g.: `slacka news 1610131196.000800 "I agree!"`)
- * To check for new posts in the channel, or new replies to the most
+ * To check for new posts in the channel/DM, or new replies to the most
    recent post: `slacka ck`.
+ * To search in a channel: `slacka <channel> find "query terms"`
 
 

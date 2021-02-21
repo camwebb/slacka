@@ -15,7 +15,8 @@
                 {
                     "label" :  "c2",
                     "name"  :  "Second Channel",
-                    "id" : "CXXXX2"
+                    "id" : "CXXXX2",
+                    "check" : false
                 }
             ]
         },

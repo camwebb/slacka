@@ -48,11 +48,9 @@ BEGIN{
       print "No such channel label" > "/dev/stderr"
       exit 1
     }
-    else {
-      read_users()
-      # team_names(ChanTeam[ARGV[1]])
-      list_conv(ChanTeam[ARGV[1]], ChanID[ARGV[1]])
-    }
+    
+    read_users()
+    list_conv(ChanTeam[ARGV[1]], ChanID[ARGV[1]])
   }
   
   else if (ARGC == 3) {
@@ -63,7 +61,6 @@ BEGIN{
     }
     else {
       read_users()
-      # team_names(ChanTeam[ARGV[1]])
       thread(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[2])
     }
   }
@@ -73,13 +70,13 @@ BEGIN{
       print "No such channel label" > "/dev/stderr"
       exit 1
     }
-    else if (ARGV[2] == "find") {
+    
+    if (ARGV[2] == "find") {
       read_users()
       find(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[3])
     }
-    else {
+    else 
       post(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[2], ARGV[3])
-    }
   }
 
   else
@@ -158,7 +155,7 @@ function post(team, channel, ts, text,      cmd, json, data, newts, \
   exit 0
 }
 
-function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i) {
+function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i, maxi) {
   
   # cmd = "curl -X POST -L -s "                               \
   #   "-H 'Authorization: Bearer " TOKEN  "' "                \
@@ -169,7 +166,7 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i)
   cmd = "curl -L -s "                                               \
     "-H 'Authorization: Bearer " Token[team]  "' "                      \
     "'https://slack.com/api/conversations.history?channel=" channel "'"
-  
+
   RS="\x04";
   cmd | getline json
   if (! json_fromJSON(json, data)) {
@@ -178,8 +175,14 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i)
   }
   # walk_array(data, "data");
 
+  # number of posts to report (default 10)
+  for (i in data["messages"])
+    maxi++
+  if (maxi >= 10)
+    maxi = 10
+  
   print ""
-  for (i = 10; i >= 1; i--) {
+  for (i = maxi; i >= 1; i--) {
     if (Name[data["messages"][i]["user"]])
       name = Name[data["messages"][i]["user"]]
     else
@@ -245,13 +248,15 @@ function msg_block(msg,     j, lines, ec, bc, dash, width) {
   }
 }
 
-function list_channels(  cmd, json, data, i) {
+function list_channels(     cmd, json, data, i) {
   PROCINFO["sorted_in"] = "@ind_num_asc"
 
+  read_users()
+  
   for (c in Token) {
     cmd = "curl -L -s -H 'Authorization: Bearer " Token[c]  \
       "' 'https://slack.com/api/conversations.list"         \
-      "?types=public_channel,private_channel'"
+      "?types=public_channel,private_channel,im,mpim'"
     RS="\x04";
     cmd | getline json
     if (! json_fromJSON(json, data)) {
@@ -260,12 +265,28 @@ function list_channels(  cmd, json, data, i) {
     }
     # walk_array(data, "data");
 
-    print "TEAM: " TName[c] " (" c ")"  
-    for (i in data["channels"]) 
-      printf "  %-12s : %-50s (priv=%s)\n", data["channels"][i]["id"], \
-        data["channels"][i]["name"] , data["channels"][i]["is_private"]
+    print "TEAM: " TName[c] " (" c ")\n"  
+    for (i in data["channels"]) {
+      
+      
+      if (data["channels"][i]["is_im"]) {
+        if (Name[data["channels"][i]["user"]])
+          name = Name[data["channels"][i]["user"]]
+        else if (data[channels][30][name])
+          name = data["channels"][i]["user"]
+        printf "  %-12s : IM with: %-40s\n", data["channels"][i]["id"], name
+      }
+      else if (data["channels"][i]["is_mpim"])
+        printf "  %-12s : MPIM: %-50s\n", data["channels"][i]["id"], \
+          data["channels"][i]["name"]
+      else if (data["channels"][i]["is_channel"])
+        printf "  %-12s : %-50s (priv=%s)\n", data["channels"][i]["id"], \
+          data["channels"][i]["name"] , data["channels"][i]["is_private"]
+    }
     print ""
   }
+
+  exit 0
 }
 
 function team_names(team,   cmd, json, data) {
@@ -308,7 +329,7 @@ function config(    json, data, i, j) {
     TName[data["teams"][i]["id"]] = data["teams"][i]["name"]
     
     for (j in data["teams"][i]["channels"]) {
-      if (data["teams"][i]["channels"][j]["label"] ~ /^(users|chans|cfg|ck|auth|find)%/) {
+      if (data["teams"][i]["channels"][j]["label"] ~ /^(users|chans|dms|cfg|ck|auth|find|T.*)$/) {
         print "Protected label: '" data["teams"][i]["channels"][j]["label"]\
           "'" > "/dev/stderr"
         exit 1
@@ -333,7 +354,7 @@ function config(    json, data, i, j) {
   }
 }
 
-function read_users(    json, data, i, j) {
+function read_users(    json, data, i) {
   RS="\x04";
   getline json < (ENVIRON["HOME"] "/.config/slacka/users.json")
   if (! json_fromJSON(json, data)) {
@@ -483,7 +504,8 @@ function auth(   cmd) {
     "\n\n   https://slack.com/oauth/v2/authorize?"                        \
     "client_id=" clientid "&user_scope=channels:history,"\
     "channels:read,groups:history,groups:read,users:read,"\
-    "chat:write,search:read\n"
+    "chat:write,search:read,im:read,im:history,im:write,"\
+    "mpim:read,mpim:history,mpim:write\n"
   print "After authorizing a workspace, examine the URL in the redirect, and"  
   print "paste the code string after 'code=' and before '&state='"
   printf " : "
