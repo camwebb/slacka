@@ -235,7 +235,8 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
       reactions = "{" length(data["messages"][i]["reactions"]) "}"
     else
       reactions = "{0}"
-    
+
+    # NB: apps (e.g., Element bidge) have no username TODO
     print "\x1b[38;5;11m" "<" name "> " "\x1b[0;m" plus " " reactions " " date \
       " ( " data["messages"][i]["ts"] " )\n" 
     msg = gensub(/\n/," // ", "G", data["messages"][i]["text"])
@@ -414,20 +415,39 @@ function read_users(    json, data, i) {
     Name[data[i]["id"]] = data[i]["name"]
 }
 
-function make_users(    json, data, name, i, j) {
+function make_users(    cmd, json, data, name, i, j, redo) {
   for (i in Token) {
-    cmd = "curl -L -s -H 'Authorization: Bearer " Token[i]  \
-      "' 'https://slack.com/api/users.list?team_id=" i "'"
-    RS="\x04";
-    cmd | getline json
-    if (! json_fromJSON(json, data)) {
-      print "JSON import failed!" > "/dev/stderr"
-      exit 1
+    printf "  %s " , TName[i]
+    redo = 1
+    while (redo) {
+      cmd = "curl -L -s -H 'Authorization: Bearer " Token[i]    \
+        "' 'https://slack.com/api/users.list?team_id=" i "&limit=1000"
+      if (data["response_metadata"]["next_cursor"])
+        cmd = cmd "&cursor=" data["response_metadata"]["next_cursor"]
+      cmd = cmd "'"
+      RS="\x04";
+      cmd | getline json
+      if (! json_fromJSON(json, data)) {
+        print "JSON import failed!" > "/dev/stderr"
+        exit 1
+      }
+      
+      if (!data["ok"] == 1) {
+        print "Reading failed"
+        exit 1
+      }
+      else
+        printf "OK "
+    
+      for (j in data["members"])
+        name[data["members"][j]["id"]] =                        \
+          data["members"][j]["profile"]["real_name_normalized"]
+      
+      if (!data["response_metadata"]["next_cursor"])
+        # do not need another page
+        redo = 0
     }
-
-    for (j in data["members"])
-      name[data["members"][j]["id"]] =                          \
-        data["members"][j]["profile"]["real_name_normalized"]
+    printf "\n"
   }
   
   # Todo: check for directory
