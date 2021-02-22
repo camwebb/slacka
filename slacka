@@ -21,16 +21,18 @@ BEGIN{
   
   if (ARGC == 1) {
     print "Usage:\n  Maintenance: slacka auth | cfg | users | chans "
-    print "  Check:       slacka ck"
+    print "  Check new:   slacka ck"
     print "  Read:        slacka <channel> [ <thread_id> ]    "
     print "  Write:       slacka <channel> [ new | <thread_id> ]"\
       " \"your message\""
+    print "  React:       slacka <channel> <thread_id> :<emoji>:"
+      " \"your message\""
     print "  Search:      slacka <channel>  find  \"search term\""
-    printf "    Chans: "
+    mychans = "    My chans:"
     PROCINFO["sorted_in"] = "@ind_str_asc"
     for (i in ChanID)
-      printf "%s ", i
-    print ""
+      mychans = mychans " " i
+    msg_block(mychans)
     exit 0
   }
 
@@ -75,12 +77,44 @@ BEGIN{
       read_users()
       find(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[3])
     }
+    else if ((ARGV[2] != "new") && (ARGV[3] ~ /^:[a-z_]+:$/)) {
+      react(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[2],
+            gensub(/:/,"","G",ARGV[3]))
+    }
     else 
       post(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[2], ARGV[3])
   }
 
   else
     exit 1
+}
+
+function react(team, channel, ts, rtype,      cmd, json, data, newts,   \
+               status, lts, lrep) {
+  # https://github.com/iamcal/emoji-data -> emoji.json -> short_name
+  # :smile: SMILING FACE WITH OPEN MOUTH AND SMILING EYES 😄
+  # :+1:, :thumbsup: THUMBS UP SIGN 👍
+  cmd = "curl -X POST -L -s "                                     \
+    "-H 'Authorization: Bearer " Token[team]  "' "                \
+    "-H 'Content-type: application/x-www-form-urlencoded' "       \
+    "--data-urlencode 'channel=" channel "' "                     \
+    "--data-urlencode \"name=" rtype "\" "                        \
+    "--data-urlencode 'timestamp=" ts "' "
+  cmd = cmd "https://slack.com/api/reactions.add"
+  
+  RS="\x04";
+  cmd | getline json
+  if (! json_fromJSON(json, data)) {
+    print "JSON import failed!" > "/dev/stderr"
+    exit 1
+  }
+  
+  if (!data["ok"]) {
+    print "Posting failed"
+    walk_array(data, "data");
+    exit 1
+  }
+  print "Success"
 }
 
 function post(team, channel, ts, text,      cmd, json, data, newts, \
@@ -155,7 +189,7 @@ function post(team, channel, ts, text,      cmd, json, data, newts, \
   exit 0
 }
 
-function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i, maxi) {
+function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i, maxi, reactions) {
   
   # cmd = "curl -X POST -L -s "                               \
   #   "-H 'Authorization: Bearer " TOKEN  "' "                \
@@ -196,8 +230,13 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
       plus = "(+" data["messages"][i]["reply_count"] ")"
     else
       plus = "(+0)"
-
-    print "\x1b[38;5;11m" "<" name "> " "\x1b[0;m" plus " " date           \
+    
+    if (isarray(data["messages"][i]["reactions"]))
+      reactions = "{" length(data["messages"][i]["reactions"]) "}"
+    else
+      reactions = "{0}"
+    
+    print "\x1b[38;5;11m" "<" name "> " "\x1b[0;m" plus " " reactions " " date \
       " ( " data["messages"][i]["ts"] " )\n" 
     msg = gensub(/\n/," // ", "G", data["messages"][i]["text"])
     msg_block(msg)
@@ -205,7 +244,8 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
   }
 }
 
-function thread(team, channel, ts,     name, cmd, json, data, msg, i) {
+function thread(team, channel, ts,     name, cmd, json, data, msg, i, \
+                reactions) {
   
   cmd = "curl -L -s "                                               \
     "-H 'Authorization: Bearer " Token[team]  "' "                        \
@@ -227,7 +267,13 @@ function thread(team, channel, ts,     name, cmd, json, data, msg, i) {
       name = Name[data["messages"][i]["user"]]
     else
       name = data["messages"][i]["user"]
-    print "\x1b[38;5;11m" "<" name "> " "\x1b[0;m" \
+
+    if (isarray(data["messages"][i]["reactions"]))
+      reactions = "{" length(data["messages"][i]["reactions"]) "}"
+    else
+      reactions = "{0}"
+
+    print "\x1b[38;5;11m" "<" name "> " "\x1b[0;m" reactions " "    \
       strftime("[%m-%d %a %H:%M] ",data["messages"][i]["ts"]) "\n"
     msg = gensub(/\n/," // ", "G", data["messages"][i]["text"])
     msg_block(msg)
@@ -501,10 +547,11 @@ function auth(   cmd) {
   clientsecret  = "0832b70040d2f885716185fa190d7b5d"
   
   print "In your browser, log in to a Slack workspace, then go to this URL:" \
-    "\n\n   https://slack.com/oauth/v2/authorize?"                        \
-    "client_id=" clientid "&user_scope=channels:history,"\
-    "channels:read,groups:history,groups:read,users:read,"\
-    "chat:write,search:read,im:read,im:history,im:write,"\
+    "\n\n   https://slack.com/oauth/v2/authorize?"                      \
+    "client_id=" clientid "&user_scope="                                \
+    "channels:history,channels:read,groups:history,groups:read,"        \
+    "users:read,chat:write,search:read,reactions:write,"                \
+    "im:read,im:history,im:write,"                                      \
     "mpim:read,mpim:history,mpim:write\n"
   print "After authorizing a workspace, examine the URL in the redirect, and"  
   print "paste the code string after 'code=' and before '&state='"
