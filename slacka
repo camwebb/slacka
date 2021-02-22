@@ -185,6 +185,14 @@ function post(team, channel, ts, text,      cmd, json, data, newts, \
       lrep[i] "\"},"
   gsub(/.$/,"]",json)
   print json > (ENVIRON["HOME"] "/.config/slacka/latest.json")
+
+  # write to log file
+  print "Time: " strftime() "\n"                                        \
+    "Team: " team "\n"                                                  \
+    "Chan: " channel "\n"                                               \
+    "TS:   " ts "\n"                                                    \
+    "Msg:  \"" text "\"\n" >>                                           \
+    ENVIRON["HOME"] "/.config/slacka/log.txt"
   
   exit 0
 }

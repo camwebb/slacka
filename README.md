@@ -5,9 +5,9 @@
 ### Dependencies
 
  * `gawk`
- * `gawk-json` (Build from
-   [source](https://sourceforge.net/p/gawkextlib/), or: Arch AUR:
-   `gawk-json`)
+ * `gawk-json` (Build from source:
+   [gawkextlib, gawk-json](https://sourceforge.net/p/gawkextlib/),
+   [rapidJson](https://rapidjson.org/)) or: Arch AUR: `gawk-json`)
  * `curl`
 
 ### OAuth Tokens
