@@ -103,5 +103,7 @@ workspaces) are:
  * To check for new posts in the channel/DM, or new replies to the most
    recent post: `slacka ck`.
  * To search in a channel: `slacka <channel> find "query terms"`
+ * To react: `slacka <channel> <thread_id> :<emoji>:`, where `<emoji>`
+   is the standard emoji [`short_name`](https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json)
 
 
