@@ -18,14 +18,15 @@ only way to get a token is via a registered App
 App will appear in the Workspace ‘Apps’ list seen by team members and
 can be deinstalled by other users, or admins. (Note: in the following,
 ‘App’ refers to a Slack API App, that could do anything, and may be
-called anything, not to this specific `slacka` Gaawk app.)
+called anything, not to this specific `slacka` Gawk app.)
 
 The _easy way_ to get a token is to use the built-in `slacka auth`
 function. This uses the distributed (multi-workspace) App registered
 by the `slacka` author.  Note that this App is not in the Slack App
 Directory, and not “approved” by Slack, and so some Workspaces may
 require the workspace admins to allow use of Slacka (depending on
-admin settings).
+admin settings). If all is working well, you will redirected to a
+webapp that will give you a token.
 
 The _other way_ to get tokens is to register your own App.  If for
 some reason the author’s Slacka app is deleted, then the built-in

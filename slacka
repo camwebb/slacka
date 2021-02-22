@@ -77,7 +77,7 @@ BEGIN{
       read_users()
       find(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[3])
     }
-    else if ((ARGV[2] != "new") && (ARGV[3] ~ /^:[a-z_]+:$/)) {
+    else if ((ARGV[2] != "new") && (ARGV[3] ~ /^:[a-z0-9_+]+:$/)) {
       react(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[2],
             gensub(/:/,"","G",ARGV[3]))
     }
@@ -191,12 +191,6 @@ function post(team, channel, ts, text,      cmd, json, data, newts, \
 
 function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i, maxi, reactions) {
   
-  # cmd = "curl -X POST -L -s "                               \
-  #   "-H 'Authorization: Bearer " TOKEN  "' "                \
-  #   "-H 'Content-type: application/x-www-form-urlencoded' " \
-  #   "--data-urlencode 'channel=" channel "' "               \
-  #   "https://slack.com/api/conversations.history"
-
   cmd = "curl -L -s "                                               \
     "-H 'Authorization: Bearer " Token[team]  "' "                      \
     "'https://slack.com/api/conversations.history?channel=" channel "'"
@@ -227,12 +221,13 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
     else
       date = strftime("[%m-%d]",data["messages"][i]["ts"])
     if (data["messages"][i]["reply_count"])
-      plus = "(+" data["messages"][i]["reply_count"] ")"
+      plus = "\x1b[38;5;12m(+" data["messages"][i]["reply_count"] ")\x1b[0;m"
     else
       plus = "(+0)"
     
     if (isarray(data["messages"][i]["reactions"]))
-      reactions = "{" length(data["messages"][i]["reactions"]) "}"
+      reactions = "\x1b[38;5;10m{" length(data["messages"][i]["reactions"]) \
+        "}\x1b[0;m"
     else
       reactions = "{0}"
 
@@ -270,11 +265,12 @@ function thread(team, channel, ts,     name, cmd, json, data, msg, i, \
       name = data["messages"][i]["user"]
 
     if (isarray(data["messages"][i]["reactions"]))
-      reactions = "{" length(data["messages"][i]["reactions"]) "}"
+      reactions = "\x1b[38;5;10m{" length(data["messages"][i]["reactions"]) \
+        "}\x1b[0;m"
     else
       reactions = "{0}"
 
-    print "\x1b[38;5;11m" "<" name "> " "\x1b[0;m" reactions " "    \
+    print "\x1b[38;5;11m" "<" name ">" "\x1b[0;m" " " reactions  " "   \
       strftime("[%m-%d %a %H:%M] ",data["messages"][i]["ts"]) "\n"
     msg = gensub(/\n/," // ", "G", data["messages"][i]["text"])
     msg_block(msg)
@@ -550,21 +546,17 @@ function auth(   cmd) {
 
   # App setup (2021-02-19):
   #   1. Create app in a workspace, copy client ID and client secret 
-  #   2. Add permissions -> User scopes: channels:history, channels:read,
-  #        groups:history, groups:read, users:read, calls:write
-  #   3. Add dummy redirect URL (e.g., https://example.com/path )
+  #   2. Add permissions -(see below)
+  #   3. Add dummy redirect URL (e.g., https://example.com/path ), or webapp
+  #      (https://camwebb.info/cgi/slackatoken)
   #   4. Confirm hardcode review
   #   5. Distribute
   # App can now be used in any authorized workspace
 
-  # YES! there is a 'secret' revealed here. But without the CODE,
-  #   generated during the user permission phase, and the subsequent
-  #   TOKEN, there is no way for a third party to eavesdrop or post as a user.
   # See: https://github.com/wee-slack/wee-slack/wee_slack.py
   #      https://github.com/erroneousboat/slack-term/wiki
   
   clientid       = "234851842290.1757541358103"
-  clientsecret  = "0832b70040d2f885716185fa190d7b5d"
   
   print "In your browser, log in to a Slack workspace, then go to this URL:" \
     "\n\n   https://slack.com/oauth/v2/authorize?"                      \
@@ -573,42 +565,46 @@ function auth(   cmd) {
     "users:read,chat:write,search:read,reactions:write,"                \
     "im:read,im:history,im:write,"                                      \
     "mpim:read,mpim:history,mpim:write\n"
-  print "After authorizing a workspace, examine the URL in the redirect, and"  
-  print "paste the code string after 'code=' and before '&state='"
-  printf " : "
-  RS="\n";
-  getline code < "-"
+  print "After authorizing a workspace, you will be redirected to to a"
+  print "  webapp that will display your token. If the webapp is not working"
+  print "  see https://github.com/camwebb/slacka for other methods."
 
-  RS="\x04";
-  cmd = "curl -s "                                                      \
-    "'https://slack.com/api/oauth.v2.access?code=" code                 \
-    "&client_id=" clientid                                              \
-    "&client_secret=" clientsecret   "'"
-  cmd | getline json
-  if (! json_fromJSON(json, data)) {
-    print "JSON import failed!" > "/dev/stderr"
-    exit 1
-  }
+  # print "After authorizing a workspace, examine the URL in the redirect, and"  
+  # print "paste the code string after 'code=' and before '&state='"
+  # printf " : "
+  # RS="\n";
+  # getline code < "-"
 
-  if (!data["ok"] == "true") {
-    print "Authorization failed."
-    exit 1
-  }
+  # RS="\x04";
+  # cmd = "curl -s "                                                      \
+  #   "'https://slack.com/api/oauth.v2.access?code=" code                 \
+  #   "&client_id=" clientid                                              \
+  #   "&client_secret=" clientsecret   "'"
+  # cmd | getline json
+  # if (! json_fromJSON(json, data)) {
+  #   print "JSON import failed!" > "/dev/stderr"
+  #   exit 1
+  # }
+
+  # if (!data["ok"] == "true") {
+  #   print "Authorization failed."
+  #   exit 1
+  # }
   
-  print "\nNow enter JSON into the slacka config.json file, below team:"
-  print "{"
-  print "  \"id\"    : \"" data["team"]["id"] "\","
-  print "  \"name\"  : \"" data["team"]["name"] "\","
-  print "  \"token\" : \"" data["authed_user"]["access_token"] "\","
-  print "  \"channels\" :"
-  print "  ["
-  print "    {"
-  print "      \"label\" :  \"foo\","
-  print "      \"name\"  :  \"Dummy\","
-  print "      \"id\"    :  \"CXXXXXX\""
-  print "    }"
-  print "  ]"
-  print "}"
+  # print "\nNow enter JSON into the slacka config.json file, below team:"
+  # print "{"
+  # print "  \"id\"    : \"" data["team"]["id"] "\","
+  # print "  \"name\"  : \"" data["team"]["name"] "\","
+  # print "  \"token\" : \"" data["authed_user"]["access_token"] "\","
+  # print "  \"channels\" :"
+  # print "  ["
+  # print "    {"
+  # print "      \"label\" :  \"foo\","
+  # print "      \"name\"  :  \"Dummy\","
+  # print "      \"id\"    :  \"CXXXXXX\""
+  # print "    }"
+  # print "  ]"
+  # print "}"
 
   exit 0
 
