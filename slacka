@@ -47,7 +47,7 @@ BEGIN{
            gensub(/^\/([^/]+)\/$/,"\\1","G", ARGV[2]))
     # attempt to post
     else
-      post(ChanTeam[ARGV[1]], ChanID[ARGV[1]], "new", ARGV[3])
+      post(ChanTeam[ARGV[1]], ChanID[ARGV[1]], "new", ARGV[2])
   }
 
   else if (ARGC == 4) {

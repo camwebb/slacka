@@ -1,0 +1,38 @@
+#!/bin/env -S gawk -f
+
+# Cron executable to check for new Slack messages and notify
+# Cam Webb <https://github.com/camwebb/slacka>
+# (c) Cam Webb <cw@camwebb.info>
+# License: The Unlicense <http://unlicense.org/>
+
+# Installation:
+#   1) Make this script executable
+#   2) Make sure config files are in ~/.config/slacka/
+#   3) trigger via crontab, e.g.,
+#        0 * * * * *   /home/foo/some/where/slacka-notify   \
+#                      /home/foo/bin/slacka
+
+BEGIN{
+
+  # test to see if you are online
+  "ping -c 1 google.com 2> /dev/null | grep '1 received'" | getline CK
+  if (!CK)
+    exit 1
+
+  # if not run as a user the executable should be set as the first argument
+  if (ARGC == 2)
+    SLACKA = ARGV[1]
+  else
+    SLACKA = "slacka"
+
+  cmd = SLACKA " new"
+  while ((cmd | getline) > 0)
+    if ($0 ~ /^New /)
+      msg = $0 " " msg
+  
+  if (msg) {
+    system("DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus' "   \
+           "notify-send -u normal -t 36000000 'Slacka: " msg "'")
+    # system("sudo /root/bin/msgterm 'Slacka: " msg "'")
+  }
+}
