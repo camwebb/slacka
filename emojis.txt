@@ -1,0 +1,1812 @@
+Slack emojis from https://github.com/iamcal/emoji-data/emoji.json
+
+100 : HUNDRED POINTS SYMBOL
+1234 : INPUT SYMBOL FOR NUMBERS
+-1 : THUMBS DOWN SIGN
++1 : THUMBS UP SIGN
+8ball : BILLIARDS
+abacus : ABACUS
+abcd : INPUT SYMBOL FOR LATIN SMALL LETTERS
+abc : INPUT SYMBOL FOR LATIN LETTERS
+ab : NEGATIVE SQUARED AB
+accept : CIRCLED IDEOGRAPH ACCEPT
+accordion : ACCORDION
+adhesive_bandage : ADHESIVE BANDAGE
+admission_tickets : ADMISSION TICKETS
+adult : ADULT
+aerial_tramway : AERIAL TRAMWAY
+airplane : AIRPLANE
+airplane_arriving : AIRPLANE ARRIVING
+airplane_departure : AIRPLANE DEPARTURE
+alarm_clock : ALARM CLOCK
+alembic : ALEMBIC
+alien : EXTRATERRESTRIAL ALIEN
+ambulance : AMBULANCE
+amphora : AMPHORA
+anatomical_heart : ANATOMICAL HEART
+anchor : ANCHOR
+a : NEGATIVE SQUARED LATIN CAPITAL LETTER A
+angel : BABY ANGEL
+anger : ANGER SYMBOL
+angry : ANGRY FACE
+anguished : ANGUISHED FACE
+ant : ANT
+apple : RED APPLE
+aquarius : AQUARIUS
+aries : ARIES
+arrow_backward : BLACK LEFT-POINTING TRIANGLE
+arrow_double_down : BLACK DOWN-POINTING DOUBLE TRIANGLE
+arrow_double_up : BLACK UP-POINTING DOUBLE TRIANGLE
+arrow_down : DOWNWARDS BLACK ARROW
+arrow_down_small : DOWN-POINTING SMALL RED TRIANGLE
+arrow_forward : BLACK RIGHT-POINTING TRIANGLE
+arrow_heading_down : ARROW POINTING RIGHTWARDS THEN CURVING DOWNWARDS
+arrow_heading_up : ARROW POINTING RIGHTWARDS THEN CURVING UPWARDS
+arrow_left : LEFTWARDS BLACK ARROW
+arrow_lower_left : SOUTH WEST ARROW
+arrow_lower_right : SOUTH EAST ARROW
+arrow_right : BLACK RIGHTWARDS ARROW
+arrow_right_hook : RIGHTWARDS ARROW WITH HOOK
+arrows_clockwise : CLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS
+arrows_counterclockwise : ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS
+arrow_up_down : UP DOWN ARROW
+arrow_upper_left : NORTH WEST ARROW
+arrow_upper_right : NORTH EAST ARROW
+arrow_up_small : UP-POINTING SMALL RED TRIANGLE
+arrow_up : UPWARDS BLACK ARROW
+art : ARTIST PALETTE
+articulated_lorry : ARTICULATED LORRY
+artist : ARTIST
+astonished : ASTONISHED FACE
+astronaut : ASTRONAUT
+athletic_shoe : ATHLETIC SHOE
+atm : AUTOMATED TELLER MACHINE
+atom_symbol : ATOM SYMBOL
+auto_rickshaw : AUTO RICKSHAW
+avocado : AVOCADO
+axe : AXE
+baby : BABY
+baby_bottle : BABY BOTTLE
+baby_chick : BABY CHICK
+baby_symbol : BABY SYMBOL
+back : BACK WITH LEFTWARDS ARROW ABOVE
+bacon : BACON
+badger : BADGER
+badminton_racquet_and_shuttlecock : BADMINTON RACQUET AND SHUTTLECOCK
+bagel : BAGEL
+baggage_claim : BAGGAGE CLAIM
+baguette_bread : BAGUETTE BREAD
+bald_man : MAN: BALD
+bald_person : PERSON: BALD
+bald_woman : WOMAN: BALD
+ballet_shoes : BALLET SHOES
+balloon : BALLOON
+ballot_box_with_ballot : BALLOT BOX WITH BALLOT
+ballot_box_with_check : BALLOT BOX WITH CHECK
+bamboo : PINE DECORATION
+banana : BANANA
+bangbang : DOUBLE EXCLAMATION MARK
+banjo : BANJO
+bank : BANK
+barber : BARBER POLE
+bar_chart : BAR CHART
+barely_sunny : SUN BEHIND LARGE CLOUD
+baseball : BASEBALL
+basketball : BASKETBALL AND HOOP
+basket : BASKET
+bat : BAT
+bath : BATH
+bathtub : BATHTUB
+battery : BATTERY
+beach_with_umbrella : BEACH WITH UMBRELLA
+bear : BEAR FACE
+bearded_person : BEARDED PERSON
+beaver : BEAVER
+bed : BED
+bee : HONEYBEE
+beer : BEER MUG
+beers : CLINKING BEER MUGS
+beetle : BEETLE
+beginner : JAPANESE SYMBOL FOR BEGINNER
+bell : BELL
+bellhop_bell : BELLHOP BELL
+bell_pepper : BELL PEPPER
+bento : BENTO BOX
+beverage_box : BEVERAGE BOX
+bicyclist : BICYCLIST
+bike : BICYCLE
+bikini : BIKINI
+billed_cap : BILLED CAP
+biohazard_sign : BIOHAZARD
+bird : BIRD
+birthday : BIRTHDAY CAKE
+bison : BISON
+black_cat : BLACK CAT
+black_circle_for_record : RECORD BUTTON
+black_circle : MEDIUM BLACK CIRCLE
+black_heart : BLACK HEART
+black_joker : PLAYING CARD BLACK JOKER
+black_large_square : BLACK LARGE SQUARE
+black_left_pointing_double_triangle_with_vertical_bar : LAST TRACK BUTTON
+black_medium_small_square : BLACK MEDIUM SMALL SQUARE
+black_medium_square : BLACK MEDIUM SQUARE
+black_nib : BLACK NIB
+black_right_pointing_double_triangle_with_vertical_bar : NEXT TRACK BUTTON
+black_right_pointing_triangle_with_double_vertical_bar : PLAY OR PAUSE BUTTON
+black_small_square : BLACK SMALL SQUARE
+black_square_button : BLACK SQUARE BUTTON
+black_square_for_stop : STOP BUTTON
+blond-haired-man : MAN: BLOND HAIR
+blond-haired-woman : WOMAN: BLOND HAIR
+blossom : BLOSSOM
+blowfish : BLOWFISH
+blueberries : BLUEBERRIES
+blue_book : BLUE BOOK
+blue_car : RECREATIONAL VEHICLE
+blue_heart : BLUE HEART
+blush : SMILING FACE WITH SMILING EYES
+b : NEGATIVE SQUARED LATIN CAPITAL LETTER B
+boar : BOAR
+boat : SAILBOAT
+bomb : BOMB
+bone : BONE
+bookmark : BOOKMARK
+bookmark_tabs : BOOKMARK TABS
+book : OPEN BOOK
+books : BOOKS
+boom : COLLISION SYMBOL
+boomerang : BOOMERANG
+boot : WOMANS BOOTS
+bouquet : BOUQUET
+bow_and_arrow : BOW AND ARROW
+bowling : BOWLING
+bowl_with_spoon : BOWL WITH SPOON
+bow : PERSON BOWING DEEPLY
+boxing_glove : BOXING GLOVE
+boy : BOY
+brain : BRAIN
+bread : BREAD
+breast-feeding : BREAST-FEEDING
+bricks : BRICK
+bride_with_veil : BRIDE WITH VEIL
+bridge_at_night : BRIDGE AT NIGHT
+briefcase : BRIEFCASE
+briefs : BRIEFS
+broccoli : BROCCOLI
+broken_heart : BROKEN HEART
+broom : BROOM
+brown_heart : BROWN HEART
+bubble_tea : BUBBLE TEA
+bucket : BUCKET
+bug : BUG
+building_construction : BUILDING CONSTRUCTION
+bulb : ELECTRIC LIGHT BULB
+bullettrain_front : HIGH-SPEED TRAIN WITH BULLET NOSE
+bullettrain_side : HIGH-SPEED TRAIN
+burrito : BURRITO
+bus : BUS
+busstop : BUS STOP
+bust_in_silhouette : BUST IN SILHOUETTE
+busts_in_silhouette : BUSTS IN SILHOUETTE
+butter : BUTTER
+butterfly : BUTTERFLY
+cactus : CACTUS
+cake : SHORTCAKE
+calendar : TEAR-OFF CALENDAR
+calling : MOBILE PHONE WITH RIGHTWARDS ARROW AT LEFT
+call_me_hand : CALL ME HAND
+camel : BACTRIAN CAMEL
+camera : CAMERA
+camera_with_flash : CAMERA WITH FLASH
+camping : CAMPING
+cancer : CANCER
+candle : CANDLE
+candy : CANDY
+canned_food : CANNED FOOD
+canoe : CANOE
+capital_abcd : INPUT SYMBOL FOR LATIN CAPITAL LETTERS
+capricorn : CAPRICORN
+car : AUTOMOBILE
+card_file_box : CARD FILE BOX
+card_index : CARD INDEX
+card_index_dividers : CARD INDEX DIVIDERS
+carousel_horse : CAROUSEL HORSE
+carpentry_saw : CARPENTRY SAW
+carrot : CARROT
+cat2 : CAT
+cat : CAT FACE
+cd : OPTICAL DISC
+chains : CHAINS
+chair : CHAIR
+champagne : BOTTLE WITH POPPING CORK
+chart : CHART WITH UPWARDS TREND AND YEN SIGN
+chart_with_downwards_trend : CHART WITH DOWNWARDS TREND
+chart_with_upwards_trend : CHART WITH UPWARDS TREND
+checkered_flag : CHEQUERED FLAG
+cheese_wedge : CHEESE WEDGE
+cherries : CHERRIES
+cherry_blossom : CHERRY BLOSSOM
+chess_pawn : CHESS PAWN
+chestnut : CHESTNUT
+chicken : CHICKEN
+child : CHILD
+children_crossing : CHILDREN CROSSING
+chipmunk : CHIPMUNK
+chocolate_bar : CHOCOLATE BAR
+chopsticks : CHOPSTICKS
+christmas_tree : CHRISTMAS TREE
+church : CHURCH
+cinema : CINEMA
+circus_tent : CIRCUS TENT
+cityscape : CITYSCAPE
+city_sunrise : SUNSET OVER BUILDINGS
+city_sunset : CITYSCAPE AT DUSK
+clap : CLAPPING HANDS SIGN
+clapper : CLAPPER BOARD
+classical_building : CLASSICAL BUILDING
+clinking_glasses : CLINKING GLASSES
+clipboard : CLIPBOARD
+clock1030 : CLOCK FACE TEN-THIRTY
+clock10 : CLOCK FACE TEN OCLOCK
+clock1130 : CLOCK FACE ELEVEN-THIRTY
+clock11 : CLOCK FACE ELEVEN OCLOCK
+clock1230 : CLOCK FACE TWELVE-THIRTY
+clock12 : CLOCK FACE TWELVE OCLOCK
+clock130 : CLOCK FACE ONE-THIRTY
+clock1 : CLOCK FACE ONE OCLOCK
+clock230 : CLOCK FACE TWO-THIRTY
+clock2 : CLOCK FACE TWO OCLOCK
+clock330 : CLOCK FACE THREE-THIRTY
+clock3 : CLOCK FACE THREE OCLOCK
+clock430 : CLOCK FACE FOUR-THIRTY
+clock4 : CLOCK FACE FOUR OCLOCK
+clock530 : CLOCK FACE FIVE-THIRTY
+clock5 : CLOCK FACE FIVE OCLOCK
+clock630 : CLOCK FACE SIX-THIRTY
+clock6 : CLOCK FACE SIX OCLOCK
+clock730 : CLOCK FACE SEVEN-THIRTY
+clock7 : CLOCK FACE SEVEN OCLOCK
+clock830 : CLOCK FACE EIGHT-THIRTY
+clock8 : CLOCK FACE EIGHT OCLOCK
+clock930 : CLOCK FACE NINE-THIRTY
+clock9 : CLOCK FACE NINE OCLOCK
+closed_book : CLOSED BOOK
+closed_lock_with_key : CLOSED LOCK WITH KEY
+closed_umbrella : CLOSED UMBRELLA
+cloud : CLOUD
+clown_face : CLOWN FACE
+cl : SQUARED CL
+clubs : BLACK CLUB SUIT
+cn : China Flag
+coat : COAT
+cockroach : COCKROACH
+cocktail : COCKTAIL GLASS
+coconut : COCONUT
+coffee : HOT BEVERAGE
+coffin : COFFIN
+coin : COIN
+cold_face : FREEZING FACE
+cold_sweat : FACE WITH OPEN MOUTH AND COLD SWEAT
+comet : COMET
+compass : COMPASS
+compression : CLAMP
+computer : PERSONAL COMPUTER
+confetti_ball : CONFETTI BALL
+confounded : CONFOUNDED FACE
+confused : CONFUSED FACE
+congratulations : CIRCLED IDEOGRAPH CONGRATULATION
+construction : CONSTRUCTION SIGN
+construction_worker : CONSTRUCTION WORKER
+control_knobs : CONTROL KNOBS
+convenience_store : CONVENIENCE STORE
+cook : COOK
+cookie : COOKIE
+cool : SQUARED COOL
+cop : POLICE OFFICER
+copyright : COPYRIGHT SIGN
+corn : EAR OF MAIZE
+couch_and_lamp : COUCH AND LAMP
+couplekiss : KISS
+couple_with_heart : COUPLE WITH HEART
+cow2 : COW
+cow : COW FACE
+crab : CRAB
+credit_card : CREDIT CARD
+crescent_moon : CRESCENT MOON
+cricket_bat_and_ball : CRICKET BAT AND BALL
+cricket : CRICKET
+crocodile : CROCODILE
+croissant : CROISSANT
+crossed_fingers : HAND WITH INDEX AND MIDDLE FINGERS CROSSED
+crossed_flags : CROSSED FLAGS
+crossed_swords : CROSSED SWORDS
+crown : CROWN
+cry : CRYING FACE
+crying_cat_face : CRYING CAT FACE
+crystal_ball : CRYSTAL BALL
+cucumber : CUCUMBER
+cupcake : CUPCAKE
+cupid : HEART WITH ARROW
+cup_with_straw : CUP WITH STRAW
+curling_stone : CURLING STONE
+curly_haired_man : MAN: CURLY HAIR
+curly_haired_person : PERSON: CURLY HAIR
+curly_haired_woman : WOMAN: CURLY HAIR
+curly_loop : CURLY LOOP
+currency_exchange : CURRENCY EXCHANGE
+curry : CURRY AND RICE
+custard : CUSTARD
+customs : CUSTOMS
+cut_of_meat : CUT OF MEAT
+cyclone : CYCLONE
+dagger_knife : DAGGER
+dancer : DANCER
+dancers : WOMAN WITH BUNNY EARS
+dango : DANGO
+dark_sunglasses : SUNGLASSES
+dart : DIRECT HIT
+dash : DASH SYMBOL
+date : CALENDAR
+deaf_man : DEAF MAN
+deaf_person : DEAF PERSON
+deaf_woman : DEAF WOMAN
+deciduous_tree : DECIDUOUS TREE
+deer : DEER
+de : Germany Flag
+department_store : DEPARTMENT STORE
+derelict_house_building : DERELICT HOUSE
+desert : DESERT
+desert_island : DESERT ISLAND
+desktop_computer : DESKTOP COMPUTER
+diamonds : BLACK DIAMOND SUIT
+diamond_shape_with_a_dot_inside : DIAMOND SHAPE WITH A DOT INSIDE
+disappointed : DISAPPOINTED FACE
+disappointed_relieved : DISAPPOINTED BUT RELIEVED FACE
+disguised_face : DISGUISED FACE
+diving_mask : DIVING MASK
+diya_lamp : DIYA LAMP
+dizzy : DIZZY SYMBOL
+dizzy_face : DIZZY FACE
+dna : DNA DOUBLE HELIX
+dodo : DODO
+dog2 : DOG
+dog : DOG FACE
+dollar : BANKNOTE WITH DOLLAR SIGN
+dolls : JAPANESE DOLLS
+dolphin : DOLPHIN
+do_not_litter : DO NOT LITTER SYMBOL
+door : DOOR
+double_vertical_bar : PAUSE BUTTON
+doughnut : DOUGHNUT
+dove_of_peace : DOVE
+dragon : DRAGON
+dragon_face : DRAGON FACE
+dress : DRESS
+dromedary_camel : DROMEDARY CAMEL
+drooling_face : DROOLING FACE
+droplet : DROPLET
+drop_of_blood : DROP OF BLOOD
+drum_with_drumsticks : DRUM WITH DRUMSTICKS
+duck : DUCK
+dumpling : DUMPLING
+dvd : DVD
+eagle : EAGLE
+ear : EAR
+ear_of_rice : EAR OF RICE
+earth_africa : EARTH GLOBE EUROPE-AFRICA
+earth_americas : EARTH GLOBE AMERICAS
+earth_asia : EARTH GLOBE ASIA-AUSTRALIA
+ear_with_hearing_aid : EAR WITH HEARING AID
+egg : EGG
+eggplant : AUBERGINE
+eight : KEYCAP 8
+eight_pointed_black_star : EIGHT POINTED BLACK STAR
+eight_spoked_asterisk : EIGHT SPOKED ASTERISK
+eject : EJECT BUTTON
+electric_plug : ELECTRIC PLUG
+elephant : ELEPHANT
+elevator : ELEVATOR
+elf : ELF
+e-mail : E-MAIL SYMBOL
+email : ENVELOPE
+end : END WITH LEFTWARDS ARROW ABOVE
+envelope_with_arrow : ENVELOPE WITH DOWNWARDS ARROW ABOVE
+es : Spain Flag
+euro : BANKNOTE WITH EURO SIGN
+european_castle : EUROPEAN CASTLE
+european_post_office : EUROPEAN POST OFFICE
+evergreen_tree : EVERGREEN TREE
+exclamation : HEAVY EXCLAMATION MARK SYMBOL
+exploding_head : SHOCKED FACE WITH EXPLODING HEAD
+expressionless : EXPRESSIONLESS FACE
+eye : EYE
+eyeglasses : EYEGLASSES
+eye-in-speech-bubble : EYE IN SPEECH BUBBLE
+eyes : EYES
+face_palm : FACE PALM
+facepunch : FISTED HAND SIGN
+face_vomiting : FACE WITH OPEN MOUTH VOMITING
+face_with_cowboy_hat : FACE WITH COWBOY HAT
+face_with_hand_over_mouth : SMILING FACE WITH SMILING EYES AND HAND COVERING MOUTH
+face_with_head_bandage : FACE WITH HEAD-BANDAGE
+face_with_monocle : FACE WITH MONOCLE
+face_with_raised_eyebrow : FACE WITH ONE EYEBROW RAISED
+face_with_rolling_eyes : FACE WITH ROLLING EYES
+face_with_symbols_on_mouth : SERIOUS FACE WITH SYMBOLS COVERING MOUTH
+face_with_thermometer : FACE WITH THERMOMETER
+factory : FACTORY
+factory_worker : FACTORY WORKER
+fairy : FAIRY
+falafel : FALAFEL
+fallen_leaf : FALLEN LEAF
+family : FAMILY
+farmer : FARMER
+fast_forward : BLACK RIGHT-POINTING DOUBLE TRIANGLE
+fax : FAX MACHINE
+fearful : FEARFUL FACE
+feather : FEATHER
+feet : PAW PRINTS
+female-artist : WOMAN ARTIST
+female-astronaut : WOMAN ASTRONAUT
+female-construction-worker : WOMAN CONSTRUCTION WORKER
+female-cook : WOMAN COOK
+female-detective : WOMAN DETECTIVE
+female-doctor : WOMAN HEALTH WORKER
+female_elf : WOMAN ELF
+female-factory-worker : WOMAN FACTORY WORKER
+female_fairy : WOMAN FAIRY
+female-farmer : WOMAN FARMER
+female-firefighter : WOMAN FIREFIGHTER
+female_genie : WOMAN GENIE
+female-guard : WOMAN GUARD
+female-judge : WOMAN JUDGE
+female_mage : WOMAN MAGE
+female-mechanic : WOMAN MECHANIC
+female-office-worker : WOMAN OFFICE WORKER
+female-pilot : WOMAN PILOT
+female-police-officer : WOMAN POLICE OFFICER
+female-scientist : WOMAN SCIENTIST
+female_sign : FEMALE SIGN
+female-singer : WOMAN SINGER
+female-student : WOMAN STUDENT
+female_superhero : WOMAN SUPERHERO
+female_supervillain : WOMAN SUPERVILLAIN
+female-teacher : WOMAN TEACHER
+female-technologist : WOMAN TECHNOLOGIST
+female_vampire : WOMAN VAMPIRE
+female_zombie : WOMAN ZOMBIE
+fencer : FENCER
+ferris_wheel : FERRIS WHEEL
+ferry : FERRY
+field_hockey_stick_and_ball : FIELD HOCKEY STICK AND BALL
+file_cabinet : FILE CABINET
+file_folder : FILE FOLDER
+film_frames : FILM FRAMES
+film_projector : FILM PROJECTOR
+firecracker : FIRECRACKER
+fire_engine : FIRE ENGINE
+fire_extinguisher : FIRE EXTINGUISHER
+firefighter : FIREFIGHTER
+fire : FIRE
+fireworks : FIREWORKS
+first_place_medal : FIRST PLACE MEDAL
+first_quarter_moon : FIRST QUARTER MOON SYMBOL
+first_quarter_moon_with_face : FIRST QUARTER MOON WITH FACE
+fish_cake : FISH CAKE WITH SWIRL DESIGN
+fish : FISH
+fishing_pole_and_fish : FISHING POLE AND FISH
+fist : RAISED FIST
+five : KEYCAP 5
+flag-ac : Ascension Island Flag
+flag-ad : Andorra Flag
+flag-ae : United Arab Emirates Flag
+flag-af : Afghanistan Flag
+flag-ag : Antigua & Barbuda Flag
+flag-ai : Anguilla Flag
+flag-al : Albania Flag
+flag-am : Armenia Flag
+flag-ao : Angola Flag
+flag-aq : Antarctica Flag
+flag-ar : Argentina Flag
+flag-as : American Samoa Flag
+flag-at : Austria Flag
+flag-au : Australia Flag
+flag-aw : Aruba Flag
+flag-ax : Åland Islands Flag
+flag-az : Azerbaijan Flag
+flag-ba : Bosnia & Herzegovina Flag
+flag-bb : Barbados Flag
+flag-bd : Bangladesh Flag
+flag-be : Belgium Flag
+flag-bf : Burkina Faso Flag
+flag-bg : Bulgaria Flag
+flag-bh : Bahrain Flag
+flag-bi : Burundi Flag
+flag-bj : Benin Flag
+flag-bl : St. Barthélemy Flag
+flag-bm : Bermuda Flag
+flag-bn : Brunei Flag
+flag-bo : Bolivia Flag
+flag-bq : Caribbean Netherlands Flag
+flag-br : Brazil Flag
+flag-bs : Bahamas Flag
+flag-bt : Bhutan Flag
+flag-bv : Bouvet Island Flag
+flag-bw : Botswana Flag
+flag-by : Belarus Flag
+flag-bz : Belize Flag
+flag-ca : Canada Flag
+flag-cc : Cocos (Keeling) Islands Flag
+flag-cd : Congo - Kinshasa Flag
+flag-cf : Central African Republic Flag
+flag-cg : Congo - Brazzaville Flag
+flag-ch : Switzerland Flag
+flag-ci : Côte d’Ivoire Flag
+flag-ck : Cook Islands Flag
+flag-cl : Chile Flag
+flag-cm : Cameroon Flag
+flag-co : Colombia Flag
+flag-cp : Clipperton Island Flag
+flag-cr : Costa Rica Flag
+flag-cu : Cuba Flag
+flag-cv : Cape Verde Flag
+flag-cw : Curaçao Flag
+flag-cx : Christmas Island Flag
+flag-cy : Cyprus Flag
+flag-cz : Czechia Flag
+flag-dg : Diego Garcia Flag
+flag-dj : Djibouti Flag
+flag-dk : Denmark Flag
+flag-dm : Dominica Flag
+flag-do : Dominican Republic Flag
+flag-dz : Algeria Flag
+flag-ea : Ceuta & Melilla Flag
+flag-ec : Ecuador Flag
+flag-ee : Estonia Flag
+flag-eg : Egypt Flag
+flag-eh : Western Sahara Flag
+flag-england : England Flag
+flag-er : Eritrea Flag
+flag-et : Ethiopia Flag
+flag-eu : European Union Flag
+flag-fi : Finland Flag
+flag-fj : Fiji Flag
+flag-fk : Falkland Islands Flag
+flag-fm : Micronesia Flag
+flag-fo : Faroe Islands Flag
+flag-ga : Gabon Flag
+flag-gd : Grenada Flag
+flag-ge : Georgia Flag
+flag-gf : French Guiana Flag
+flag-gg : Guernsey Flag
+flag-gh : Ghana Flag
+flag-gi : Gibraltar Flag
+flag-gl : Greenland Flag
+flag-gm : Gambia Flag
+flag-gn : Guinea Flag
+flag-gp : Guadeloupe Flag
+flag-gq : Equatorial Guinea Flag
+flag-gr : Greece Flag
+flag-gs : South Georgia & South Sandwich Islands Flag
+flag-gt : Guatemala Flag
+flag-gu : Guam Flag
+flag-gw : Guinea-Bissau Flag
+flag-gy : Guyana Flag
+flag-hk : Hong Kong SAR China Flag
+flag-hm : Heard & McDonald Islands Flag
+flag-hn : Honduras Flag
+flag-hr : Croatia Flag
+flag-ht : Haiti Flag
+flag-hu : Hungary Flag
+flag-ic : Canary Islands Flag
+flag-id : Indonesia Flag
+flag-ie : Ireland Flag
+flag-il : Israel Flag
+flag-im : Isle of Man Flag
+flag-in : India Flag
+flag-io : British Indian Ocean Territory Flag
+flag-iq : Iraq Flag
+flag-ir : Iran Flag
+flag-is : Iceland Flag
+flag-je : Jersey Flag
+flag-jm : Jamaica Flag
+flag-jo : Jordan Flag
+flag-ke : Kenya Flag
+flag-kg : Kyrgyzstan Flag
+flag-kh : Cambodia Flag
+flag-ki : Kiribati Flag
+flag-km : Comoros Flag
+flag-kn : St. Kitts & Nevis Flag
+flag-kp : North Korea Flag
+flag-kw : Kuwait Flag
+flag-ky : Cayman Islands Flag
+flag-kz : Kazakhstan Flag
+flag-la : Laos Flag
+flag-lb : Lebanon Flag
+flag-lc : St. Lucia Flag
+flag-li : Liechtenstein Flag
+flag-lk : Sri Lanka Flag
+flag-lr : Liberia Flag
+flag-ls : Lesotho Flag
+flag-lt : Lithuania Flag
+flag-lu : Luxembourg Flag
+flag-lv : Latvia Flag
+flag-ly : Libya Flag
+flag-ma : Morocco Flag
+flag-mc : Monaco Flag
+flag-md : Moldova Flag
+flag-me : Montenegro Flag
+flag-mf : St. Martin Flag
+flag-mg : Madagascar Flag
+flag-mh : Marshall Islands Flag
+flag-mk : North Macedonia Flag
+flag-ml : Mali Flag
+flag-mm : Myanmar (Burma) Flag
+flag-mn : Mongolia Flag
+flag-mo : Macao SAR China Flag
+flag-mp : Northern Mariana Islands Flag
+flag-mq : Martinique Flag
+flag-mr : Mauritania Flag
+flag-ms : Montserrat Flag
+flag-mt : Malta Flag
+flag-mu : Mauritius Flag
+flag-mv : Maldives Flag
+flag-mw : Malawi Flag
+flag-mx : Mexico Flag
+flag-my : Malaysia Flag
+flag-mz : Mozambique Flag
+flag-na : Namibia Flag
+flag-nc : New Caledonia Flag
+flag-ne : Niger Flag
+flag-nf : Norfolk Island Flag
+flag-ng : Nigeria Flag
+flag-ni : Nicaragua Flag
+flag-nl : Netherlands Flag
+flag-no : Norway Flag
+flag-np : Nepal Flag
+flag-nr : Nauru Flag
+flag-nu : Niue Flag
+flag-nz : New Zealand Flag
+flag-om : Oman Flag
+flag-pa : Panama Flag
+flag-pe : Peru Flag
+flag-pf : French Polynesia Flag
+flag-pg : Papua New Guinea Flag
+flag-ph : Philippines Flag
+flag-pk : Pakistan Flag
+flag-pl : Poland Flag
+flag-pm : St. Pierre & Miquelon Flag
+flag-pn : Pitcairn Islands Flag
+flag-pr : Puerto Rico Flag
+flag-ps : Palestinian Territories Flag
+flag-pt : Portugal Flag
+flag-pw : Palau Flag
+flag-py : Paraguay Flag
+flag-qa : Qatar Flag
+flag-re : Réunion Flag
+flag-ro : Romania Flag
+flag-rs : Serbia Flag
+flag-rw : Rwanda Flag
+flag-sa : Saudi Arabia Flag
+flag-sb : Solomon Islands Flag
+flags : CARP STREAMER
+flag-scotland : Scotland Flag
+flag-sc : Seychelles Flag
+flag-sd : Sudan Flag
+flag-se : Sweden Flag
+flag-sg : Singapore Flag
+flag-sh : St. Helena Flag
+flag-si : Slovenia Flag
+flag-sj : Svalbard & Jan Mayen Flag
+flag-sk : Slovakia Flag
+flag-sl : Sierra Leone Flag
+flag-sm : San Marino Flag
+flag-sn : Senegal Flag
+flag-so : Somalia Flag
+flag-sr : Suriname Flag
+flag-ss : South Sudan Flag
+flag-st : São Tomé & Príncipe Flag
+flag-sv : El Salvador Flag
+flag-sx : Sint Maarten Flag
+flag-sy : Syria Flag
+flag-sz : Eswatini Flag
+flag-ta : Tristan da Cunha Flag
+flag-tc : Turks & Caicos Islands Flag
+flag-td : Chad Flag
+flag-tf : French Southern Territories Flag
+flag-tg : Togo Flag
+flag-th : Thailand Flag
+flag-tj : Tajikistan Flag
+flag-tk : Tokelau Flag
+flag-tl : Timor-Leste Flag
+flag-tm : Turkmenistan Flag
+flag-tn : Tunisia Flag
+flag-to : Tonga Flag
+flag-tr : Turkey Flag
+flag-tt : Trinidad & Tobago Flag
+flag-tv : Tuvalu Flag
+flag-tw : Taiwan Flag
+flag-tz : Tanzania Flag
+flag-ua : Ukraine Flag
+flag-ug : Uganda Flag
+flag-um : U.S. Outlying Islands Flag
+flag-un : United Nations Flag
+flag-uy : Uruguay Flag
+flag-uz : Uzbekistan Flag
+flag-va : Vatican City Flag
+flag-vc : St. Vincent & Grenadines Flag
+flag-ve : Venezuela Flag
+flag-vg : British Virgin Islands Flag
+flag-vi : U.S. Virgin Islands Flag
+flag-vn : Vietnam Flag
+flag-vu : Vanuatu Flag
+flag-wales : Wales Flag
+flag-wf : Wallis & Futuna Flag
+flag-ws : Samoa Flag
+flag-xk : Kosovo Flag
+flag-ye : Yemen Flag
+flag-yt : Mayotte Flag
+flag-za : South Africa Flag
+flag-zm : Zambia Flag
+flag-zw : Zimbabwe Flag
+flamingo : FLAMINGO
+flashlight : ELECTRIC TORCH
+flatbread : FLATBREAD
+fleur_de_lis : FLEUR-DE-LIS
+floppy_disk : FLOPPY DISK
+flower_playing_cards : FLOWER PLAYING CARDS
+flushed : FLUSHED FACE
+fly : FLY
+flying_disc : FLYING DISC
+flying_saucer : FLYING SAUCER
+fog : FOG
+foggy : FOGGY
+fondue : FONDUE
+football : AMERICAN FOOTBALL
+foot : FOOT
+footprints : FOOTPRINTS
+fork_and_knife : FORK AND KNIFE
+fortune_cookie : FORTUNE COOKIE
+fountain : FOUNTAIN
+four : KEYCAP 4
+four_leaf_clover : FOUR LEAF CLOVER
+fox_face : FOX FACE
+frame_with_picture : FRAMED PICTURE
+free : SQUARED FREE
+fr : France Flag
+fried_egg : COOKING
+fried_shrimp : FRIED SHRIMP
+fries : FRENCH FRIES
+frog : FROG FACE
+frowning : FROWNING FACE WITH OPEN MOUTH
+fuelpump : FUEL PUMP
+full_moon : FULL MOON SYMBOL
+full_moon_with_face : FULL MOON WITH FACE
+funeral_urn : FUNERAL URN
+game_die : GAME DIE
+garlic : GARLIC
+gb : United Kingdom Flag
+gear : GEAR
+gem : GEM STONE
+gemini : GEMINI
+genie : GENIE
+ghost : GHOST
+gift_heart : HEART WITH RIBBON
+gift : WRAPPED PRESENT
+giraffe_face : GIRAFFE FACE
+girl : GIRL
+glass_of_milk : GLASS OF MILK
+globe_with_meridians : GLOBE WITH MERIDIANS
+gloves : GLOVES
+goal_net : GOAL NET
+goat : GOAT
+goggles : GOGGLES
+golfer : PERSON GOLFING
+golf : FLAG IN HOLE
+gorilla : GORILLA
+grapes : GRAPES
+green_apple : GREEN APPLE
+green_book : GREEN BOOK
+green_heart : GREEN HEART
+green_salad : GREEN SALAD
+grey_exclamation : WHITE EXCLAMATION MARK ORNAMENT
+grey_question : WHITE QUESTION MARK ORNAMENT
+grimacing : GRIMACING FACE
+grin : GRINNING FACE WITH SMILING EYES
+grinning : GRINNING FACE
+guardsman : GUARDSMAN
+guide_dog : GUIDE DOG
+guitar : GUITAR
+gun : PISTOL
+haircut : HAIRCUT
+hamburger : HAMBURGER
+hammer_and_pick : HAMMER AND PICK
+hammer_and_wrench : HAMMER AND WRENCH
+hammer : HAMMER
+hamster : HAMSTER FACE
+handbag : HANDBAG
+handball : HANDBALL
+hand : RAISED HAND
+handshake : HANDSHAKE
+hankey : PILE OF POO
+hash : HASH KEY
+hatched_chick : FRONT-FACING BABY CHICK
+hatching_chick : HATCHING CHICK
+headphones : HEADPHONE
+headstone : HEADSTONE
+health_worker : HEALTH WORKER
+hear_no_evil : HEAR-NO-EVIL MONKEY
+heartbeat : BEATING HEART
+heart_decoration : HEART DECORATION
+heart_eyes_cat : SMILING CAT FACE WITH HEART-SHAPED EYES
+heart_eyes : SMILING FACE WITH HEART-SHAPED EYES
+heart : HEAVY BLACK HEART
+heartpulse : GROWING HEART
+hearts : BLACK HEART SUIT
+heavy_check_mark : HEAVY CHECK MARK
+heavy_division_sign : HEAVY DIVISION SIGN
+heavy_dollar_sign : HEAVY DOLLAR SIGN
+heavy_heart_exclamation_mark_ornament : HEART EXCLAMATION
+heavy_minus_sign : HEAVY MINUS SIGN
+heavy_multiplication_x : HEAVY MULTIPLICATION X
+heavy_plus_sign : HEAVY PLUS SIGN
+hedgehog : HEDGEHOG
+helicopter : HELICOPTER
+helmet_with_white_cross : RESCUE WORKER’S HELMET
+herb : HERB
+hibiscus : HIBISCUS
+high_brightness : HIGH BRIGHTNESS SYMBOL
+high_heel : HIGH-HEELED SHOE
+hiking_boot : HIKING BOOT
+hindu_temple : HINDU TEMPLE
+hippopotamus : HIPPOPOTAMUS
+hocho : HOCHO
+hole : HOLE
+honey_pot : HONEY POT
+hook : HOOK
+horse : HORSE FACE
+horse_racing : HORSE RACING
+hospital : HOSPITAL
+hotdog : HOT DOG
+hotel : HOTEL
+hot_face : OVERHEATED FACE
+hot_pepper : HOT PEPPER
+hotsprings : HOT SPRINGS
+hourglass_flowing_sand : HOURGLASS WITH FLOWING SAND
+hourglass : HOURGLASS
+house_buildings : HOUSES
+house : HOUSE BUILDING
+house_with_garden : HOUSE WITH GARDEN
+hugging_face : HUGGING FACE
+hushed : HUSHED FACE
+hut : HUT
+ice_cream : ICE CREAM
+icecream : SOFT ICE CREAM
+ice_cube : ICE CUBE
+ice_hockey_stick_and_puck : ICE HOCKEY STICK AND PUCK
+ice_skate : ICE SKATE
+ideograph_advantage : CIRCLED IDEOGRAPH ADVANTAGE
+id : SQUARED ID
+i_love_you_hand_sign : I LOVE YOU HAND SIGN
+imp : IMP
+inbox_tray : INBOX TRAY
+incoming_envelope : INCOMING ENVELOPE
+infinity : INFINITY
+information_desk_person : INFORMATION DESK PERSON
+information_source : INFORMATION SOURCE
+innocent : SMILING FACE WITH HALO
+interrobang : EXCLAMATION QUESTION MARK
+iphone : MOBILE PHONE
+it : Italy Flag
+izakaya_lantern : IZAKAYA LANTERN
+jack_o_lantern : JACK-O-LANTERN
+japanese_castle : JAPANESE CASTLE
+japanese_goblin : JAPANESE GOBLIN
+japanese_ogre : JAPANESE OGRE
+japan : SILHOUETTE OF JAPAN
+jeans : JEANS
+jigsaw : JIGSAW PUZZLE PIECE
+joy_cat : CAT FACE WITH TEARS OF JOY
+joy : FACE WITH TEARS OF JOY
+joystick : JOYSTICK
+jp : Japan Flag
+judge : JUDGE
+juggling : JUGGLING
+kaaba : KAABA
+kangaroo : KANGAROO
+keyboard : KEYBOARD
+keycap_star : KEYCAP: *
+keycap_ten : KEYCAP TEN
+key : KEY
+kimono : KIMONO
+kissing_cat : KISSING CAT FACE WITH CLOSED EYES
+kissing_closed_eyes : KISSING FACE WITH CLOSED EYES
+kissing_heart : FACE THROWING A KISS
+kissing : KISSING FACE
+kissing_smiling_eyes : KISSING FACE WITH SMILING EYES
+kiss : KISS MARK
+kite : KITE
+kiwifruit : KIWIFRUIT
+kneeling_person : KNEELING PERSON
+knife_fork_plate : FORK AND KNIFE WITH PLATE
+knot : KNOT
+koala : KOALA
+koko : SQUARED KATAKANA KOKO
+kr : South Korea Flag
+lab_coat : LAB COAT
+label : LABEL
+lacrosse : LACROSSE STICK AND BALL
+ladder : LADDER
+ladybug : LADY BEETLE
+large_blue_circle : LARGE BLUE CIRCLE
+large_blue_diamond : LARGE BLUE DIAMOND
+large_blue_square : LARGE BLUE SQUARE
+large_brown_circle : LARGE BROWN CIRCLE
+large_brown_square : LARGE BROWN SQUARE
+large_green_circle : LARGE GREEN CIRCLE
+large_green_square : LARGE GREEN SQUARE
+large_orange_circle : LARGE ORANGE CIRCLE
+large_orange_diamond : LARGE ORANGE DIAMOND
+large_orange_square : LARGE ORANGE SQUARE
+large_purple_circle : LARGE PURPLE CIRCLE
+large_purple_square : LARGE PURPLE SQUARE
+large_red_square : LARGE RED SQUARE
+large_yellow_circle : LARGE YELLOW CIRCLE
+large_yellow_square : LARGE YELLOW SQUARE
+last_quarter_moon : LAST QUARTER MOON SYMBOL
+last_quarter_moon_with_face : LAST QUARTER MOON WITH FACE
+latin_cross : LATIN CROSS
+laughing : SMILING FACE WITH OPEN MOUTH AND TIGHTLY-CLOSED EYES
+leafy_green : LEAFY GREEN
+leaves : LEAF FLUTTERING IN WIND
+ledger : LEDGER
+left-facing_fist : LEFT-FACING FIST
+left_luggage : LEFT LUGGAGE
+left_right_arrow : LEFT RIGHT ARROW
+left_speech_bubble : LEFT SPEECH BUBBLE
+leftwards_arrow_with_hook : LEFTWARDS ARROW WITH HOOK
+leg : LEG
+lemon : LEMON
+leo : LEO
+leopard : LEOPARD
+level_slider : LEVEL SLIDER
+libra : LIBRA
+lightning : CLOUD WITH LIGHTNING
+light_rail : LIGHT RAIL
+linked_paperclips : LINKED PAPERCLIPS
+link : LINK SYMBOL
+lion_face : LION FACE
+lips : MOUTH
+lipstick : LIPSTICK
+lizard : LIZARD
+llama : LLAMA
+lobster : LOBSTER
+lock : LOCK
+lock_with_ink_pen : LOCK WITH INK PEN
+lollipop : LOLLIPOP
+long_drum : LONG DRUM
+loop : DOUBLE CURLY LOOP
+lotion_bottle : LOTION BOTTLE
+loud_sound : SPEAKER WITH THREE SOUND WAVES
+loudspeaker : PUBLIC ADDRESS LOUDSPEAKER
+love_hotel : LOVE HOTEL
+love_letter : LOVE LETTER
+low_brightness : LOW BRIGHTNESS SYMBOL
+lower_left_ballpoint_pen : PEN
+lower_left_crayon : CRAYON
+lower_left_fountain_pen : FOUNTAIN PEN
+lower_left_paintbrush : PAINTBRUSH
+luggage : LUGGAGE
+lungs : LUNGS
+lying_face : LYING FACE
+mage : MAGE
+magic_wand : MAGIC WAND
+mag : LEFT-POINTING MAGNIFYING GLASS
+magnet : MAGNET
+mag_right : RIGHT-POINTING MAGNIFYING GLASS
+mahjong : MAHJONG TILE RED DRAGON
+mailbox_closed : CLOSED MAILBOX WITH LOWERED FLAG
+mailbox : CLOSED MAILBOX WITH RAISED FLAG
+mailbox_with_mail : OPEN MAILBOX WITH RAISED FLAG
+mailbox_with_no_mail : OPEN MAILBOX WITH LOWERED FLAG
+male-artist : MAN ARTIST
+male-astronaut : MAN ASTRONAUT
+male-construction-worker : MAN CONSTRUCTION WORKER
+male-cook : MAN COOK
+male-detective : MAN DETECTIVE
+male-doctor : MAN HEALTH WORKER
+male_elf : MAN ELF
+male-factory-worker : MAN FACTORY WORKER
+male_fairy : MAN FAIRY
+male-farmer : MAN FARMER
+male-firefighter : MAN FIREFIGHTER
+male_genie : MAN GENIE
+male-guard : MAN GUARD
+male-judge : MAN JUDGE
+male_mage : MAN MAGE
+male-mechanic : MAN MECHANIC
+male-office-worker : MAN OFFICE WORKER
+male-pilot : MAN PILOT
+male-police-officer : MAN POLICE OFFICER
+male-scientist : MAN SCIENTIST
+male_sign : MALE SIGN
+male-singer : MAN SINGER
+male-student : MAN STUDENT
+male_superhero : MAN SUPERHERO
+male_supervillain : MAN SUPERVILLAIN
+male-teacher : MAN TEACHER
+male-technologist : MAN TECHNOLOGIST
+male_vampire : MAN VAMPIRE
+male_zombie : MAN ZOMBIE
+mammoth : MAMMOTH
+man_and_woman_holding_hands : MAN AND WOMAN HOLDING HANDS
+man-biking : MAN BIKING
+man-bouncing-ball : MAN BOUNCING BALL
+man-bowing : MAN BOWING
+man-boy-boy : FAMILY: MAN, BOY, BOY
+man-boy : FAMILY: MAN, BOY
+man-cartwheeling : MAN CARTWHEELING
+man_climbing : MAN CLIMBING
+man_dancing : MAN DANCING
+man-facepalming : MAN FACEPALMING
+man_feeding_baby : MAN FEEDING BABY
+man-frowning : MAN FROWNING
+man-gesturing-no : MAN GESTURING NO
+man-gesturing-ok : MAN GESTURING OK
+man-getting-haircut : MAN GETTING HAIRCUT
+man-getting-massage : MAN GETTING MASSAGE
+man-girl-boy : FAMILY: MAN, GIRL, BOY
+man-girl : FAMILY: MAN, GIRL
+man-girl-girl : FAMILY: MAN, GIRL, GIRL
+man-golfing : MAN GOLFING
+mango : MANGO
+man-heart-man : COUPLE WITH HEART: MAN, MAN
+man_in_business_suit_levitating : PERSON IN SUIT LEVITATING
+man_in_lotus_position : MAN IN LOTUS POSITION
+man_in_manual_wheelchair : MAN IN MANUAL WHEELCHAIR
+man_in_motorized_wheelchair : MAN IN MOTORIZED WHEELCHAIR
+man_in_steamy_room : MAN IN STEAMY ROOM
+man_in_tuxedo : MAN IN TUXEDO
+man-juggling : MAN JUGGLING
+man-kiss-man : KISS: MAN, MAN
+man_kneeling : MAN KNEELING
+man-lifting-weights : MAN LIFTING WEIGHTS
+man : MAN
+man-man-boy-boy : FAMILY: MAN, MAN, BOY, BOY
+man-man-boy : FAMILY: MAN, MAN, BOY
+man-man-girl-boy : FAMILY: MAN, MAN, GIRL, BOY
+man-man-girl : FAMILY: MAN, MAN, GIRL
+man-man-girl-girl : FAMILY: MAN, MAN, GIRL, GIRL
+man-mountain-biking : MAN MOUNTAIN BIKING
+man-playing-handball : MAN PLAYING HANDBALL
+man-playing-water-polo : MAN PLAYING WATER POLO
+man-pouting : MAN POUTING
+man-raising-hand : MAN RAISING HAND
+man-rowing-boat : MAN ROWING BOAT
+man-running : MAN RUNNING
+man-shrugging : MAN SHRUGGING
+mans_shoe : MANS SHOE
+man_standing : MAN STANDING
+man-surfing : MAN SURFING
+man-swimming : MAN SWIMMING
+mantelpiece_clock : MANTELPIECE CLOCK
+man-tipping-hand : MAN TIPPING HAND
+manual_wheelchair : MANUAL WHEELCHAIR
+man-walking : MAN WALKING
+man-wearing-turban : MAN WEARING TURBAN
+man-with-bunny-ears-partying : MEN WITH BUNNY EARS
+man_with_gua_pi_mao : MAN WITH GUA PI MAO
+man_with_probing_cane : MAN WITH WHITE CANE
+man_with_turban : MAN WITH TURBAN
+man_with_veil : MAN WITH VEIL
+man-woman-boy-boy : FAMILY: MAN, WOMAN, BOY, BOY
+man-woman-boy : FAMILY: MAN, WOMAN, BOY
+man-woman-girl-boy : FAMILY: MAN, WOMAN, GIRL, BOY
+man-woman-girl : FAMILY: MAN, WOMAN, GIRL
+man-woman-girl-girl : FAMILY: MAN, WOMAN, GIRL, GIRL
+man-wrestling : MEN WRESTLING
+maple_leaf : MAPLE LEAF
+martial_arts_uniform : MARTIAL ARTS UNIFORM
+mask : FACE WITH MEDICAL MASK
+massage : FACE MASSAGE
+mate_drink : MATE DRINK
+m : CIRCLED LATIN CAPITAL LETTER M
+meat_on_bone : MEAT ON BONE
+mechanical_arm : MECHANICAL ARM
+mechanical_leg : MECHANICAL LEG
+mechanic : MECHANIC
+medal : MILITARY MEDAL
+medical_symbol : MEDICAL SYMBOL
+mega : CHEERING MEGAPHONE
+melon : MELON
+memo : MEMO
+menorah_with_nine_branches : MENORAH WITH NINE BRANCHES
+mens : MENS SYMBOL
+mermaid : MERMAID
+merman : MERMAN
+merperson : MERPERSON
+metro : METRO
+microbe : MICROBE
+microphone : MICROPHONE
+microscope : MICROSCOPE
+middle_finger : REVERSED HAND WITH MIDDLE FINGER EXTENDED
+military_helmet : MILITARY HELMET
+milky_way : MILKY WAY
+minibus : MINIBUS
+minidisc : MINIDISC
+mirror : MIRROR
+mobile_phone_off : MOBILE PHONE OFF
+moneybag : MONEY BAG
+money_mouth_face : MONEY-MOUTH FACE
+money_with_wings : MONEY WITH WINGS
+monkey_face : MONKEY FACE
+monkey : MONKEY
+monorail : MONORAIL
+moon_cake : MOON CAKE
+moon : WAXING GIBBOUS MOON SYMBOL
+mortar_board : GRADUATION CAP
+mosque : MOSQUE
+mosquito : MOSQUITO
+mostly_sunny : SUN BEHIND SMALL CLOUD
+motor_boat : MOTOR BOAT
+motorized_wheelchair : MOTORIZED WHEELCHAIR
+motor_scooter : MOTOR SCOOTER
+motorway : MOTORWAY
+mountain_bicyclist : MOUNTAIN BICYCLIST
+mountain_cableway : MOUNTAIN CABLEWAY
+mountain : MOUNTAIN
+mountain_railway : MOUNTAIN RAILWAY
+mount_fuji : MOUNT FUJI
+mouse2 : MOUSE
+mouse : MOUSE FACE
+mouse_trap : MOUSE TRAP
+movie_camera : MOVIE CAMERA
+moyai : MOYAI
+mrs_claus : MOTHER CHRISTMAS
+muscle : FLEXED BICEPS
+mushroom : MUSHROOM
+musical_keyboard : MUSICAL KEYBOARD
+musical_note : MUSICAL NOTE
+musical_score : MUSICAL SCORE
+mute : SPEAKER WITH CANCELLATION STROKE
+mx_claus : MX CLAUS
+nail_care : NAIL POLISH
+name_badge : NAME BADGE
+national_park : NATIONAL PARK
+nauseated_face : NAUSEATED FACE
+nazar_amulet : NAZAR AMULET
+necktie : NECKTIE
+negative_squared_cross_mark : NEGATIVE SQUARED CROSS MARK
+nerd_face : NERD FACE
+nesting_dolls : NESTING DOLLS
+neutral_face : NEUTRAL FACE
+new_moon : NEW MOON SYMBOL
+new_moon_with_face : NEW MOON WITH FACE
+newspaper : NEWSPAPER
+new : SQUARED NEW
+ng : SQUARED NG
+night_with_stars : NIGHT WITH STARS
+nine : KEYCAP 9
+ninja : NINJA
+no_bell : BELL WITH CANCELLATION STROKE
+no_bicycles : NO BICYCLES
+no_entry : NO ENTRY
+no_entry_sign : NO ENTRY SIGN
+no_good : FACE WITH NO GOOD GESTURE
+no_mobile_phones : NO MOBILE PHONES
+no_mouth : FACE WITHOUT MOUTH
+non-potable_water : NON-POTABLE WATER SYMBOL
+no_pedestrians : NO PEDESTRIANS
+nose : NOSE
+no_smoking : NO SMOKING SYMBOL
+notebook : NOTEBOOK
+notebook_with_decorative_cover : NOTEBOOK WITH DECORATIVE COVER
+notes : MULTIPLE MUSICAL NOTES
+nut_and_bolt : NUT AND BOLT
+o2 : NEGATIVE SQUARED LATIN CAPITAL LETTER O
+ocean : WATER WAVE
+octagonal_sign : OCTAGONAL SIGN
+octopus : OCTOPUS
+oden : ODEN
+office : OFFICE BUILDING
+office_worker : OFFICE WORKER
+o : HEAVY LARGE CIRCLE
+oil_drum : OIL DRUM
+ok_hand : OK HAND SIGN
+ok : SQUARED OK
+ok_woman : FACE WITH OK GESTURE
+older_adult : OLDER ADULT
+older_man : OLDER MAN
+older_woman : OLDER WOMAN
+old_key : OLD KEY
+olive : OLIVE
+om_symbol : OM
+oncoming_automobile : ONCOMING AUTOMOBILE
+oncoming_bus : ONCOMING BUS
+oncoming_police_car : ONCOMING POLICE CAR
+oncoming_taxi : ONCOMING TAXI
+one : KEYCAP 1
+one-piece_swimsuit : ONE-PIECE SWIMSUIT
+onion : ONION
+on : ON WITH EXCLAMATION MARK WITH LEFT RIGHT ARROW ABOVE
+open_file_folder : OPEN FILE FOLDER
+open_hands : OPEN HANDS SIGN
+open_mouth : FACE WITH OPEN MOUTH
+ophiuchus : OPHIUCHUS
+orange_book : ORANGE BOOK
+orange_heart : ORANGE HEART
+orangutan : ORANGUTAN
+orthodox_cross : ORTHODOX CROSS
+otter : OTTER
+outbox_tray : OUTBOX TRAY
+owl : OWL
+ox : OX
+oyster : OYSTER
+package : PACKAGE
+page_facing_up : PAGE FACING UP
+pager : PAGER
+page_with_curl : PAGE WITH CURL
+palms_up_together : PALMS UP TOGETHER
+palm_tree : PALM TREE
+pancakes : PANCAKES
+panda_face : PANDA FACE
+paperclip : PAPERCLIP
+parachute : PARACHUTE
+parking : NEGATIVE SQUARED LATIN CAPITAL LETTER P
+parrot : PARROT
+part_alternation_mark : PART ALTERNATION MARK
+partly_sunny_rain : SUN BEHIND RAIN CLOUD
+partly_sunny : SUN BEHIND CLOUD
+partying_face : FACE WITH PARTY HORN AND PARTY HAT
+passenger_ship : PASSENGER SHIP
+passport_control : PASSPORT CONTROL
+peace_symbol : PEACE SYMBOL
+peach : PEACH
+peacock : PEACOCK
+peanuts : PEANUTS
+pear : PEAR
+pencil2 : PENCIL
+penguin : PENGUIN
+pensive : PENSIVE FACE
+people_holding_hands : PEOPLE HOLDING HANDS
+people_hugging : PEOPLE HUGGING
+performing_arts : PERFORMING ARTS
+persevere : PERSEVERING FACE
+person_climbing : PERSON CLIMBING
+person_doing_cartwheel : PERSON DOING CARTWHEEL
+person_feeding_baby : PERSON FEEDING BABY
+person_frowning : PERSON FROWNING
+person_in_lotus_position : PERSON IN LOTUS POSITION
+person_in_manual_wheelchair : PERSON IN MANUAL WHEELCHAIR
+person_in_motorized_wheelchair : PERSON IN MOTORIZED WHEELCHAIR
+person_in_steamy_room : PERSON IN STEAMY ROOM
+person_in_tuxedo : MAN IN TUXEDO
+person_with_ball : PERSON BOUNCING BALL
+person_with_blond_hair : PERSON WITH BLOND HAIR
+person_with_headscarf : PERSON WITH HEADSCARF
+person_with_pouting_face : PERSON WITH POUTING FACE
+person_with_probing_cane : PERSON WITH WHITE CANE
+petri_dish : PETRI DISH
+phone : BLACK TELEPHONE
+pick : PICK
+pickup_truck : PICKUP TRUCK
+pie : PIE
+pig2 : PIG
+pig_nose : PIG NOSE
+pig : PIG FACE
+pill : PILL
+pilot : PILOT
+pinata : PINATA
+pinched_fingers : PINCHED FINGERS
+pinching_hand : PINCHING HAND
+pineapple : PINEAPPLE
+pirate_flag : PIRATE FLAG
+pisces : PISCES
+pizza : SLICE OF PIZZA
+placard : PLACARD
+place_of_worship : PLACE OF WORSHIP
+pleading_face : FACE WITH PLEADING EYES
+plunger : PLUNGER
+point_down : WHITE DOWN POINTING BACKHAND INDEX
+point_left : WHITE LEFT POINTING BACKHAND INDEX
+point_right : WHITE RIGHT POINTING BACKHAND INDEX
+point_up_2 : WHITE UP POINTING BACKHAND INDEX
+point_up : WHITE UP POINTING INDEX
+polar_bear : POLAR BEAR
+police_car : POLICE CAR
+poodle : POODLE
+popcorn : POPCORN
+postal_horn : POSTAL HORN
+postbox : POSTBOX
+post_office : JAPANESE POST OFFICE
+potable_water : POTABLE WATER SYMBOL
+potato : POTATO
+potted_plant : POTTED PLANT
+pouch : POUCH
+poultry_leg : POULTRY LEG
+pound : BANKNOTE WITH POUND SIGN
+pouting_cat : POUTING CAT FACE
+prayer_beads : PRAYER BEADS
+pray : PERSON WITH FOLDED HANDS
+pregnant_woman : PREGNANT WOMAN
+pretzel : PRETZEL
+prince : PRINCE
+princess : PRINCESS
+printer : PRINTER
+probing_cane : PROBING CANE
+purple_heart : PURPLE HEART
+purse : PURSE
+pushpin : PUSHPIN
+put_litter_in_its_place : PUT LITTER IN ITS PLACE SYMBOL
+question : BLACK QUESTION MARK ORNAMENT
+rabbit2 : RABBIT
+rabbit : RABBIT FACE
+raccoon : RACCOON
+racehorse : HORSE
+racing_car : RACING CAR
+racing_motorcycle : MOTORCYCLE
+radioactive_sign : RADIOACTIVE
+radio_button : RADIO BUTTON
+radio : RADIO
+rage : POUTING FACE
+railway_car : RAILWAY CAR
+railway_track : RAILWAY TRACK
+rainbow-flag : RAINBOW FLAG
+rainbow : RAINBOW
+rain_cloud : CLOUD WITH RAIN
+raised_back_of_hand : RAISED BACK OF HAND
+raised_hands : PERSON RAISING BOTH HANDS IN CELEBRATION
+raised_hand_with_fingers_splayed : HAND WITH FINGERS SPLAYED
+raising_hand : HAPPY PERSON RAISING ONE HAND
+ramen : STEAMING BOWL
+ram : RAM
+rat : RAT
+razor : RAZOR
+receipt : RECEIPT
+recycle : BLACK UNIVERSAL RECYCLING SYMBOL
+red_circle : LARGE RED CIRCLE
+red_envelope : RED GIFT ENVELOPE
+red_haired_man : MAN: RED HAIR
+red_haired_person : PERSON: RED HAIR
+red_haired_woman : WOMAN: RED HAIR
+registered : REGISTERED SIGN
+relaxed : WHITE SMILING FACE
+relieved : RELIEVED FACE
+reminder_ribbon : REMINDER RIBBON
+repeat : CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS
+repeat_one : CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS WITH CIRCLED ONE OVERLAY
+restroom : RESTROOM
+revolving_hearts : REVOLVING HEARTS
+rewind : BLACK LEFT-POINTING DOUBLE TRIANGLE
+rhinoceros : RHINOCEROS
+ribbon : RIBBON
+rice_ball : RICE BALL
+rice : COOKED RICE
+rice_cracker : RICE CRACKER
+rice_scene : MOON VIEWING CEREMONY
+right_anger_bubble : RIGHT ANGER BUBBLE
+right-facing_fist : RIGHT-FACING FIST
+ringed_planet : RINGED PLANET
+ring : RING
+robot_face : ROBOT FACE
+rocket : ROCKET
+rock : ROCK
+rolled_up_newspaper : ROLLED-UP NEWSPAPER
+roller_coaster : ROLLER COASTER
+roller_skate : ROLLER SKATE
+rolling_on_the_floor_laughing : ROLLING ON THE FLOOR LAUGHING
+roll_of_paper : ROLL OF PAPER
+rooster : ROOSTER
+rose : ROSE
+rosette : ROSETTE
+rotating_light : POLICE CARS REVOLVING LIGHT
+round_pushpin : ROUND PUSHPIN
+rowboat : ROWBOAT
+rugby_football : RUGBY FOOTBALL
+runner : RUNNER
+running_shirt_with_sash : RUNNING SHIRT WITH SASH
+ru : Russia Flag
+safety_pin : SAFETY PIN
+safety_vest : SAFETY VEST
+sagittarius : SAGITTARIUS
+sake : SAKE BOTTLE AND CUP
+salt : SALT SHAKER
+sandal : WOMANS SANDAL
+sandwich : SANDWICH
+santa : FATHER CHRISTMAS
+sari : SARI
+sa : SQUARED KATAKANA SA
+satellite_antenna : SATELLITE ANTENNA
+satellite : SATELLITE
+sauropod : SAUROPOD
+saxophone : SAXOPHONE
+scales : BALANCE SCALE
+scarf : SCARF
+school_satchel : SCHOOL SATCHEL
+school : SCHOOL
+scientist : SCIENTIST
+scissors : BLACK SCISSORS
+scooter : SCOOTER
+scorpion : SCORPION
+scorpius : SCORPIUS
+scream_cat : WEARY CAT FACE
+scream : FACE SCREAMING IN FEAR
+screwdriver : SCREWDRIVER
+scroll : SCROLL
+seal : SEAL
+seat : SEAT
+second_place_medal : SECOND PLACE MEDAL
+secret : CIRCLED IDEOGRAPH SECRET
+seedling : SEEDLING
+see_no_evil : SEE-NO-EVIL MONKEY
+selfie : SELFIE
+service_dog : SERVICE DOG
+seven : KEYCAP 7
+sewing_needle : SEWING NEEDLE
+shallow_pan_of_food : SHALLOW PAN OF FOOD
+shamrock : SHAMROCK
+shark : SHARK
+shaved_ice : SHAVED ICE
+sheep : SHEEP
+shell : SPIRAL SHELL
+shield : SHIELD
+shinto_shrine : SHINTO SHRINE
+ship : SHIP
+shirt : T-SHIRT
+shopping_bags : SHOPPING BAGS
+shopping_trolley : SHOPPING TROLLEY
+shorts : SHORTS
+shower : SHOWER
+shrimp : SHRIMP
+shrug : SHRUG
+shushing_face : FACE WITH FINGER COVERING CLOSED LIPS
+signal_strength : ANTENNA WITH BARS
+singer : SINGER
+six : KEYCAP 6
+six_pointed_star : SIX POINTED STAR WITH MIDDLE DOT
+skateboard : SKATEBOARD
+skier : SKIER
+skin-tone-2 : EMOJI MODIFIER FITZPATRICK TYPE-1-2
+skin-tone-3 : EMOJI MODIFIER FITZPATRICK TYPE-3
+skin-tone-4 : EMOJI MODIFIER FITZPATRICK TYPE-4
+skin-tone-5 : EMOJI MODIFIER FITZPATRICK TYPE-5
+skin-tone-6 : EMOJI MODIFIER FITZPATRICK TYPE-6
+ski : SKI AND SKI BOOT
+skull_and_crossbones : SKULL AND CROSSBONES
+skull : SKULL
+skunk : SKUNK
+sled : SLED
+sleeping_accommodation : SLEEPING ACCOMMODATION
+sleeping : SLEEPING FACE
+sleepy : SLEEPY FACE
+sleuth_or_spy : DETECTIVE
+slightly_frowning_face : SLIGHTLY FROWNING FACE
+slightly_smiling_face : SLIGHTLY SMILING FACE
+sloth : SLOTH
+slot_machine : SLOT MACHINE
+small_airplane : SMALL AIRPLANE
+small_blue_diamond : SMALL BLUE DIAMOND
+small_orange_diamond : SMALL ORANGE DIAMOND
+small_red_triangle_down : DOWN-POINTING RED TRIANGLE
+small_red_triangle : UP-POINTING RED TRIANGLE
+smile_cat : GRINNING CAT FACE WITH SMILING EYES
+smile : SMILING FACE WITH OPEN MOUTH AND SMILING EYES
+smiley_cat : SMILING CAT FACE WITH OPEN MOUTH
+smiley : SMILING FACE WITH OPEN MOUTH
+smiling_face_with_3_hearts : SMILING FACE WITH SMILING EYES AND THREE HEARTS
+smiling_face_with_tear : SMILING FACE WITH TEAR
+smiling_imp : SMILING FACE WITH HORNS
+smirk_cat : CAT FACE WITH WRY SMILE
+smirk : SMIRKING FACE
+smoking : SMOKING SYMBOL
+snail : SNAIL
+snake : SNAKE
+sneezing_face : SNEEZING FACE
+snowboarder : SNOWBOARDER
+snow_capped_mountain : SNOW-CAPPED MOUNTAIN
+snow_cloud : CLOUD WITH SNOW
+snowflake : SNOWFLAKE
+snowman : SNOWMAN
+snowman_without_snow : SNOWMAN WITHOUT SNOW
+soap : BAR OF SOAP
+sob : LOUDLY CRYING FACE
+soccer : SOCCER BALL
+socks : SOCKS
+softball : SOFTBALL
+soon : SOON WITH RIGHTWARDS ARROW ABOVE
+sos : SQUARED SOS
+sound : SPEAKER WITH ONE SOUND WAVE
+space_invader : ALIEN MONSTER
+spades : BLACK SPADE SUIT
+spaghetti : SPAGHETTI
+sparkler : FIREWORK SPARKLER
+sparkle : SPARKLE
+sparkles : SPARKLES
+sparkling_heart : SPARKLING HEART
+speaker : SPEAKER
+speaking_head_in_silhouette : SPEAKING HEAD
+speak_no_evil : SPEAK-NO-EVIL MONKEY
+speech_balloon : SPEECH BALLOON
+speedboat : SPEEDBOAT
+spider : SPIDER
+spider_web : SPIDER WEB
+spiral_calendar_pad : SPIRAL CALENDAR
+spiral_note_pad : SPIRAL NOTEPAD
+spock-hand : RAISED HAND WITH PART BETWEEN MIDDLE AND RING FINGERS
+sponge : SPONGE
+spoon : SPOON
+sports_medal : SPORTS MEDAL
+squid : SQUID
+stadium : STADIUM
+standing_person : STANDING PERSON
+star2 : GLOWING STAR
+star_and_crescent : STAR AND CRESCENT
+star_of_david : STAR OF DAVID
+stars : SHOOTING STAR
+star-struck : GRINNING FACE WITH STAR EYES
+star : WHITE MEDIUM STAR
+station : STATION
+statue_of_liberty : STATUE OF LIBERTY
+steam_locomotive : STEAM LOCOMOTIVE
+stethoscope : STETHOSCOPE
+stew : POT OF FOOD
+stopwatch : STOPWATCH
+straight_ruler : STRAIGHT RULER
+strawberry : STRAWBERRY
+stuck_out_tongue_closed_eyes : FACE WITH STUCK-OUT TONGUE AND TIGHTLY-CLOSED EYES
+stuck_out_tongue : FACE WITH STUCK-OUT TONGUE
+stuck_out_tongue_winking_eye : FACE WITH STUCK-OUT TONGUE AND WINKING EYE
+student : STUDENT
+studio_microphone : STUDIO MICROPHONE
+stuffed_flatbread : STUFFED FLATBREAD
+sunflower : SUNFLOWER
+sunglasses : SMILING FACE WITH SUNGLASSES
+sunny : BLACK SUN WITH RAYS
+sunrise_over_mountains : SUNRISE OVER MOUNTAINS
+sunrise : SUNRISE
+sun_with_face : SUN WITH FACE
+superhero : SUPERHERO
+supervillain : SUPERVILLAIN
+surfer : SURFER
+sushi : SUSHI
+suspension_railway : SUSPENSION RAILWAY
+swan : SWAN
+sweat_drops : SPLASHING SWEAT SYMBOL
+sweat : FACE WITH COLD SWEAT
+sweat_smile : SMILING FACE WITH OPEN MOUTH AND COLD SWEAT
+sweet_potato : ROASTED SWEET POTATO
+swimmer : SWIMMER
+symbols : INPUT SYMBOL FOR SYMBOLS
+synagogue : SYNAGOGUE
+syringe : SYRINGE
+table_tennis_paddle_and_ball : TABLE TENNIS PADDLE AND BALL
+taco : TACO
+tada : PARTY POPPER
+takeout_box : TAKEOUT BOX
+tamale : TAMALE
+tanabata_tree : TANABATA TREE
+tangerine : TANGERINE
+taurus : TAURUS
+taxi : TAXI
+teacher : TEACHER
+teapot : TEAPOT
+tea : TEACUP WITHOUT HANDLE
+technologist : TECHNOLOGIST
+teddy_bear : TEDDY BEAR
+telephone_receiver : TELEPHONE RECEIVER
+telescope : TELESCOPE
+tennis : TENNIS RACQUET AND BALL
+tent : TENT
+test_tube : TEST TUBE
+the_horns : SIGN OF THE HORNS
+thermometer : THERMOMETER
+thinking_face : THINKING FACE
+third_place_medal : THIRD PLACE MEDAL
+thong_sandal : THONG SANDAL
+thought_balloon : THOUGHT BALLOON
+thread : SPOOL OF THREAD
+three_button_mouse : COMPUTER MOUSE
+three : KEYCAP 3
+thunder_cloud_and_rain : CLOUD WITH LIGHTNING AND RAIN
+ticket : TICKET
+tiger2 : TIGER
+tiger : TIGER FACE
+timer_clock : TIMER CLOCK
+tired_face : TIRED FACE
+tm : TRADE MARK SIGN
+toilet : TOILET
+tokyo_tower : TOKYO TOWER
+tomato : TOMATO
+tongue : TONGUE
+toolbox : TOOLBOX
+toothbrush : TOOTHBRUSH
+tooth : TOOTH
+tophat : TOP HAT
+top : TOP WITH UPWARDS ARROW ABOVE
+tornado : TORNADO
+trackball : TRACKBALL
+tractor : TRACTOR
+traffic_light : HORIZONTAL TRAFFIC LIGHT
+train2 : TRAIN
+train : TRAM CAR
+tram : TRAM
+transgender_flag : TRANSGENDER FLAG
+transgender_symbol : TRANSGENDER SYMBOL
+t-rex : T-REX
+triangular_flag_on_post : TRIANGULAR FLAG ON POST
+triangular_ruler : TRIANGULAR RULER
+trident : TRIDENT EMBLEM
+triumph : FACE WITH LOOK OF TRIUMPH
+trolleybus : TROLLEYBUS
+trophy : TROPHY
+tropical_drink : TROPICAL DRINK
+tropical_fish : TROPICAL FISH
+truck : DELIVERY TRUCK
+trumpet : TRUMPET
+tulip : TULIP
+tumbler_glass : TUMBLER GLASS
+turkey : TURKEY
+turtle : TURTLE
+tv : TELEVISION
+twisted_rightwards_arrows : TWISTED RIGHTWARDS ARROWS
+two_hearts : TWO HEARTS
+two : KEYCAP 2
+two_men_holding_hands : TWO MEN HOLDING HANDS
+two_women_holding_hands : TWO WOMEN HOLDING HANDS
+u5272 : SQUARED CJK UNIFIED IDEOGRAPH-5272
+u5408 : SQUARED CJK UNIFIED IDEOGRAPH-5408
+u55b6 : SQUARED CJK UNIFIED IDEOGRAPH-55B6
+u6307 : SQUARED CJK UNIFIED IDEOGRAPH-6307
+u6708 : SQUARED CJK UNIFIED IDEOGRAPH-6708
+u6709 : SQUARED CJK UNIFIED IDEOGRAPH-6709
+u6e80 : SQUARED CJK UNIFIED IDEOGRAPH-6E80
+u7121 : SQUARED CJK UNIFIED IDEOGRAPH-7121
+u7533 : SQUARED CJK UNIFIED IDEOGRAPH-7533
+u7981 : SQUARED CJK UNIFIED IDEOGRAPH-7981
+u7a7a : SQUARED CJK UNIFIED IDEOGRAPH-7A7A
+umbrella_on_ground : UMBRELLA ON GROUND
+umbrella : UMBRELLA
+umbrella_with_rain_drops : UMBRELLA WITH RAIN DROPS
+unamused : UNAMUSED FACE
+underage : NO ONE UNDER EIGHTEEN SYMBOL
+unicorn_face : UNICORN FACE
+unlock : OPEN LOCK
+upside_down_face : UPSIDE-DOWN FACE
+up : SQUARED UP WITH EXCLAMATION MARK
+us : United States Flag
+vampire : VAMPIRE
+vertical_traffic_light : VERTICAL TRAFFIC LIGHT
+vhs : VIDEOCASSETTE
+vibration_mode : VIBRATION MODE
+video_camera : VIDEO CAMERA
+video_game : VIDEO GAME
+violin : VIOLIN
+virgo : VIRGO
+volcano : VOLCANO
+volleyball : VOLLEYBALL
+vs : SQUARED VS
+v : VICTORY HAND
+waffle : WAFFLE
+walking : PEDESTRIAN
+waning_crescent_moon : WANING CRESCENT MOON SYMBOL
+waning_gibbous_moon : WANING GIBBOUS MOON SYMBOL
+warning : WARNING SIGN
+wastebasket : WASTEBASKET
+watch : WATCH
+water_buffalo : WATER BUFFALO
+watermelon : WATERMELON
+water_polo : WATER POLO
+wave : WAVING HAND SIGN
+waving_black_flag : WAVING BLACK FLAG
+waving_white_flag : WHITE FLAG
+wavy_dash : WAVY DASH
+waxing_crescent_moon : WAXING CRESCENT MOON SYMBOL
+wc : WATER CLOSET
+weary : WEARY FACE
+wedding : WEDDING
+weight_lifter : PERSON LIFTING WEIGHTS
+whale2 : WHALE
+whale : SPOUTING WHALE
+wheelchair : WHEELCHAIR SYMBOL
+wheel_of_dharma : WHEEL OF DHARMA
+white_check_mark : WHITE HEAVY CHECK MARK
+white_circle : MEDIUM WHITE CIRCLE
+white_flower : WHITE FLOWER
+white_frowning_face : FROWNING FACE
+white_haired_man : MAN: WHITE HAIR
+white_haired_person : PERSON: WHITE HAIR
+white_haired_woman : WOMAN: WHITE HAIR
+white_heart : WHITE HEART
+white_large_square : WHITE LARGE SQUARE
+white_medium_small_square : WHITE MEDIUM SMALL SQUARE
+white_medium_square : WHITE MEDIUM SQUARE
+white_small_square : WHITE SMALL SQUARE
+white_square_button : WHITE SQUARE BUTTON
+wilted_flower : WILTED FLOWER
+wind_blowing_face : WIND FACE
+wind_chime : WIND CHIME
+window : WINDOW
+wine_glass : WINE GLASS
+wink : WINKING FACE
+wolf : WOLF FACE
+woman-biking : WOMAN BIKING
+woman-bouncing-ball : WOMAN BOUNCING BALL
+woman-bowing : WOMAN BOWING
+woman-boy-boy : FAMILY: WOMAN, BOY, BOY
+woman-boy : FAMILY: WOMAN, BOY
+woman-cartwheeling : WOMAN CARTWHEELING
+woman_climbing : WOMAN CLIMBING
+woman-facepalming : WOMAN FACEPALMING
+woman_feeding_baby : WOMAN FEEDING BABY
+woman-frowning : WOMAN FROWNING
+woman-gesturing-no : WOMAN GESTURING NO
+woman-gesturing-ok : WOMAN GESTURING OK
+woman-getting-haircut : WOMAN GETTING HAIRCUT
+woman-getting-massage : WOMAN GETTING MASSAGE
+woman-girl-boy : FAMILY: WOMAN, GIRL, BOY
+woman-girl : FAMILY: WOMAN, GIRL
+woman-girl-girl : FAMILY: WOMAN, GIRL, GIRL
+woman-golfing : WOMAN GOLFING
+woman-heart-man : COUPLE WITH HEART: WOMAN, MAN
+woman-heart-woman : COUPLE WITH HEART: WOMAN, WOMAN
+woman_in_lotus_position : WOMAN IN LOTUS POSITION
+woman_in_manual_wheelchair : WOMAN IN MANUAL WHEELCHAIR
+woman_in_motorized_wheelchair : WOMAN IN MOTORIZED WHEELCHAIR
+woman_in_steamy_room : WOMAN IN STEAMY ROOM
+woman_in_tuxedo : WOMAN IN TUXEDO
+woman-juggling : WOMAN JUGGLING
+woman-kiss-man : KISS: WOMAN, MAN
+woman-kiss-woman : KISS: WOMAN, WOMAN
+woman_kneeling : WOMAN KNEELING
+woman-lifting-weights : WOMAN LIFTING WEIGHTS
+woman-mountain-biking : WOMAN MOUNTAIN BIKING
+woman-playing-handball : WOMAN PLAYING HANDBALL
+woman-playing-water-polo : WOMAN PLAYING WATER POLO
+woman-pouting : WOMAN POUTING
+woman-raising-hand : WOMAN RAISING HAND
+woman-rowing-boat : WOMAN ROWING BOAT
+woman-running : WOMAN RUNNING
+womans_clothes : WOMANS CLOTHES
+womans_flat_shoe : FLAT SHOE
+womans_hat : WOMANS HAT
+woman-shrugging : WOMAN SHRUGGING
+woman_standing : WOMAN STANDING
+woman-surfing : WOMAN SURFING
+woman-swimming : WOMAN SWIMMING
+woman-tipping-hand : WOMAN TIPPING HAND
+woman-walking : WOMAN WALKING
+woman-wearing-turban : WOMAN WEARING TURBAN
+woman-with-bunny-ears-partying : WOMEN WITH BUNNY EARS
+woman_with_probing_cane : WOMAN WITH WHITE CANE
+woman_with_veil : WOMAN WITH VEIL
+woman : WOMAN
+woman-woman-boy-boy : FAMILY: WOMAN, WOMAN, BOY, BOY
+woman-woman-boy : FAMILY: WOMAN, WOMAN, BOY
+woman-woman-girl-boy : FAMILY: WOMAN, WOMAN, GIRL, BOY
+woman-woman-girl : FAMILY: WOMAN, WOMAN, GIRL
+woman-woman-girl-girl : FAMILY: WOMAN, WOMAN, GIRL, GIRL
+woman-wrestling : WOMEN WRESTLING
+womens : WOMENS SYMBOL
+wood : WOOD
+woozy_face : FACE WITH UNEVEN EYES AND WAVY MOUTH
+world_map : WORLD MAP
+worm : WORM
+worried : WORRIED FACE
+wrench : WRENCH
+wrestlers : WRESTLERS
+writing_hand : WRITING HAND
+x : CROSS MARK
+yarn : BALL OF YARN
+yawning_face : YAWNING FACE
+yellow_heart : YELLOW HEART
+yen : BANKNOTE WITH YEN SIGN
+yin_yang : YIN YANG
+yo-yo : YO-YO
+yum : FACE SAVOURING DELICIOUS FOOD
+zany_face : GRINNING FACE WITH ONE LARGE AND ONE SMALL EYE
+zap : HIGH VOLTAGE SIGN
+zebra_face : ZEBRA FACE
+zero : KEYCAP 0
+zipper_mouth_face : ZIPPER-MOUTH FACE
+zombie : ZOMBIE
+zzz : SLEEPING SYMBOL
