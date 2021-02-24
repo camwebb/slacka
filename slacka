@@ -525,6 +525,10 @@ function ck_new(     status, i , cmd, label, newr, newp, newest, replies, \
       print "No new posts/replies"
   }
 
+  # for communication from slacka-notify
+  if (ENVIRON["SLACKA_READONLY"])
+    exit 0
+  
   # update latest.json
   json = "["
   for (i in newest)

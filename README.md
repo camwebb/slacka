@@ -1,5 +1,7 @@
 # Slacka: an Awk (Gawk) client for Slack
 
+[**SCREENSHOTS**](doc/screenshots.md)
+
 ## Installation
 
 ### Dependencies

@@ -25,7 +25,7 @@ BEGIN{
   else
     SLACKA = "slacka"
 
-  cmd = SLACKA " new"
+  cmd = "SLACKA_READONLY=1 " SLACKA " new"
   while ((cmd | getline) > 0)
     if ($0 ~ /^New /)
       msg = $0 " " msg
