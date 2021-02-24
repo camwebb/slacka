@@ -24,7 +24,7 @@ BEGIN{
   if (ARGC == 2) {
     if (ARGV[1] == "users")
       make_users()
-    else if (ARGV[1] == "check")
+    else if (ARGV[1] == "new")
      ck_new()
     else if (ARGV[1] == "chans")
       list_channels()
@@ -70,7 +70,7 @@ BEGIN{
   else {
     print "Usage:\n  Maintenance: slacka auth  | cfg | users | \n"\
       "                       [ <channel> ] chans | newim <t> <u>"
-    print "  Check new:   slacka check"
+    print "  Check new:   slacka new"
     print "  Read:        slacka <channel> [ <thread_id> ]    "
     print "  Write:       slacka <channel> [ <thread_id> ] \"your message\""
     print "  React:       slacka <channel> <thread_id> :<emoji>:"
@@ -362,7 +362,7 @@ function config(    json, data, i, j) {
     
     for (j in data["teams"][i]["channels"]) {
       if (data["teams"][i]["channels"][j]["label"] ~ \
-          /^(users|chans|cfg|check|auth|find|newim)$/) {
+          /^(users|chans|cfg|new|auth|newim)$/) {
         print "Protected label: '" data["teams"][i]["channels"][j]["label"]\
           "'" > "/dev/stderr"
         exit 1

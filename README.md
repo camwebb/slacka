@@ -98,13 +98,13 @@ workspaces) are:
    where `<thread_id>` is the numeric code in the heading for each
    thread (actually a time stamp).
  * To post a new message to the channel (and to the DM): `slacka
-   <channel> new "your message"`
+   <channel> "your message"`
  * To post a message to a thread: `slacka <channel> <thread_id> "your
    message"` (e.g.: `slacka news 1610131196.000800 "I agree!"`)
  * To check for new posts in the channel/DM, or new replies to the most
-   recent post: `slacka ck`.
- * To search in a channel: `slacka <channel> find "query terms"`
+   recent post: `slacka new`.
+ * To search in a channel: `slacka <channel> "/query terms/"`
  * To react: `slacka <channel> <thread_id> :<emoji>:`, where `<emoji>`
-   is the standard emoji [`short_name`](https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json)
+   is the standard emoji [`short_name`](emojis.txt)
 
 
