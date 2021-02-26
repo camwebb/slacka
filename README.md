@@ -1,4 +1,4 @@
-# Slacka: an Awk (Gawk) client for Slack
+# Slacka: lightweight CLI client for Slack (in Gawk)
 
 [**SCREENSHOTS**](doc/screenshots.md)
 
