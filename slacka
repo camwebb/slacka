@@ -690,14 +690,15 @@ function write_latest(    json, i) {
 
 function print_usage(     mychans, i) {
 
-  print "Usage:\n  Maintenance: slacka auth  | cfg | users | \n"    \
-    "                       [ <channel> ] chans | newim <t> <u>"
-  print "  Check new:   slacka new"
-  print "  Read:        slacka <channel> [ <thread_id> ]    "
-  print "  Write:       slacka <channel> [ <thread_id> ] \"your message\""
-  print "  React:       slacka <channel> <thread_id> :<emoji>:"
+  print "Usage:\n  Maintenance: slacka               auth | cfg | users"\
+    " | newim <t> <u>"
+  print "  List chans:  slacka [ <channel> ] chans" 
+  print "  Check new:   slacka               new"
+  print "  Read:        slacka   <channel> [ <thread_id> ] "
+  print "  Write:       slacka   <channel> [ <thread_id> ] \"your message\""
+  print "  React:       slacka   <channel>   <thread_id>   :<emoji>:"
   " \"your message\""
-  print "  Search:      slacka <channel>  \"/search term/\""
+  print "  Search:      slacka   <channel>                 \"/search term/\""
   mychans = "    My chans:"
   PROCINFO["sorted_in"] = "@ind_str_asc"
   for (i in ChanID)
