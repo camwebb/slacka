@@ -87,7 +87,6 @@ workspaces) are:
 ### Usage
 
 ```
-Usage:
   Maintenance: slacka               auth | cfg | users | newim <t> <u>
   List chans:  slacka [ <channel> ] chans
   Check new:   slacka               new
@@ -95,8 +94,7 @@ Usage:
   Write:       slacka   <channel> [ <thread_id> ] "your message"
   React:       slacka   <channel>   <thread_id>   :<emoji>:
   Search:      slacka   <channel>                 "/search term/"
-    My chans: @arun @drew @eks @ezra @niccolo @shubhom @zaven bsa carp
-    eng faith fcac gsnews gsrand hive ml re rebooks sandbox time tt tvi
+    My chans: ...
 ```
 
  * First generate the `~/.config/slacka/users.json` file with `slacka
