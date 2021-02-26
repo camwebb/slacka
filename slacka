@@ -9,10 +9,14 @@
 
 BEGIN{
 
-  # Control logic:
-
+  # DEBUG = 1
+  
   if ((ARGC == 2) && (ARGV[1] == "cfg")) {
-    system("emacs " ENVIRON["HOME"] "/.config/slacka/config.json &")
+    if (ENVIRON["EDITOR"])
+      editor = ENVIRON["EDITOR"]
+    else
+      editor = "emacs"
+    system(editor " " ENVIRON["HOME"] "/.config/slacka/config.json &")
     exit 0
   }
   else if ((ARGC == 2) && (ARGV[1] == "auth"))
@@ -67,26 +71,12 @@ BEGIN{
       post(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[2], ARGV[3])
   }
 
-  else {
-    print "Usage:\n  Maintenance: slacka auth  | cfg | users | \n"\
-      "                       [ <channel> ] chans | newim <t> <u>"
-    print "  Check new:   slacka new"
-    print "  Read:        slacka <channel> [ <thread_id> ]    "
-    print "  Write:       slacka <channel> [ <thread_id> ] \"your message\""
-    print "  React:       slacka <channel> <thread_id> :<emoji>:"
-      " \"your message\""
-    print "  Search:      slacka <channel>  \"/search term/\""
-    mychans = "    My chans:"
-    PROCINFO["sorted_in"] = "@ind_str_asc"
-    for (i in ChanID)
-      mychans = mychans " " i
-    msg_block(mychans)
-    exit 0
-  }
+  else
+    print_usage()
 }
 
 function newim(team, users,      cmd) {
-
+  
   if ((team !~ /^T[A-Z0-9]+$/) ||               \
       (users !~ /^U[A-Z0-9,]+$/))
     error("arg 2 must be: 'TXXXX' & arg 3: 'UXXXX[,UXXXX,...]'")
@@ -95,7 +85,6 @@ function newim(team, users,      cmd) {
     "-H 'Authorization: Bearer " Token[team]  "' "                      \
     "'https://slack.com/api/conversations.open?users=" users "'"
 
-  DEBUG = 1
   if (api(cmd))
     error("create new IM failed")
 
@@ -118,12 +107,12 @@ function react(team, channel, ts, rtype,      cmd) {
   if (api(cmd))
     error("reaction failed")
 
-  print "Success"
+  success("reaction sent")
   exit 0
 }
 
-function post(team, channel, ts, text,      cmd, newts, \
-              status, lts, lrep, json, data) {
+function post(team, channel, ts, text,      cmd, status, updated) {
+
   cmd = "curl -X POST -L -s "                                     \
     "-H 'Authorization: Bearer " Token[team]  "' "                \
     "-H 'Content-type: application/x-www-form-urlencoded' "       \
@@ -135,34 +124,9 @@ function post(team, channel, ts, text,      cmd, newts, \
 
   if (api(cmd))
     error("posting failed")
-  print "Posting: success"
 
-  # only add to latest if the channel is being checked
-  if (SkipC[channel])
-    exit 0
-  
-  read_latest()
+  success("posted")
 
-  # make new latest json, updating as appropriate
-  json = "["
-  for (i in Latest) {
-    if (Latest[i]["id"] == channel) {
-      # if a new post, the channel's latest is now this post
-      if (ts == "new") {
-        Latest[i]["ts"] = Data["ts"]
-        Latest[i]["replies"] = 0
-      }
-      # if a reply, and if it's still the latest post, add a reply  
-      else if (Latest[i]["ts"] == ts)
-        Latest[i]["replies"]++
-    }
-
-    json = json "{\"id\":\"" Latest[i]["id"] "\",\"ts\":\"" Latest[i]["ts"] \
-      "\",\"replies\":\"" Latest[i]["replies"] "\"},"
-  }
-  gsub(/.$/,"]",json)
-  print json > (ENVIRON["HOME"] "/.config/slacka/latest.json")
-  
   # write to log file
   print "Time: " strftime() "\n"                                        \
     "Team: " team "\n"                                                  \
@@ -170,6 +134,21 @@ function post(team, channel, ts, text,      cmd, newts, \
     "TS:   " ts "\n"                                                    \
     "Msg:  \"" text "\"\n" >>                                           \
     ENVIRON["HOME"] "/.config/slacka/log.txt"
+
+  # only update latest.json for checked channels
+  if (Skip[channel])
+    exit 0
+
+  read_latest()
+
+  if (ts == "new") {
+    if(update_latest(channel, Data["ts"], 0))
+      write_latest()
+  }
+  else if (Latest_ts[channel] == ts) {
+    if(update_latest(channel, ts, "+1"))
+      write_latest()
+  }
   
   exit 0
 }
@@ -178,7 +157,7 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
 
   read_users()
 
-  cmd = "curl -L -s "                                               \
+  cmd = "curl -L -s "                                                   \
     "-H 'Authorization: Bearer " Token[team]  "' "                      \
     "'https://slack.com/api/conversations.history?channel=" channel "'"
 
@@ -186,7 +165,7 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
     error("sending request failed")
   # walk_array(Data, "Data");
 
-  # number of posts to report (default 10)
+  # number of posts to report (default 20)
   for (i in Data["messages"])
     maxi++
   if (maxi >= 10)
@@ -221,6 +200,12 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
     msg_block(msg)
     print ""
   }
+
+  # update latest
+  read_latest()
+  if(update_latest(channel, Data["messages"][1]["ts"],  \
+                   Data["messages"][1]["reply_count"]))
+    write_latest()
 }
 
 function thread(team, channel, ts,     name, cmd, json, data, msg, i, \
@@ -252,11 +237,18 @@ function thread(team, channel, ts,     name, cmd, json, data, msg, i, \
       reactions = "{0}"
 
     print "\x1b[38;5;11m" "<" name ">" "\x1b[0;m" " " reactions  " "   \
-      strftime("[%b-%d %a %H:%M] ",Data["messages"][i]["ts"]) "\n"
+      strftime("[%b-%d %a %H:%M] ", Data["messages"][i]["ts"])         \
+      " ( " Data["messages"][i]["ts"]  " )\n"
     msg = gensub(/\n/," // ", "G", Data["messages"][i]["text"])
     msg_block(msg)
     print ""
   }
+
+  # update latest, but only if the ts matches
+  read_latest()
+  if (Latest_ts[channel] == ts)
+    if(update_latest(channel, ts, length(Data["messages"])))
+      write_latest()
 }
 
 function msg_block(msg,     j, lines, ec, bc, dash, width) {
@@ -380,11 +372,9 @@ function config(    json, data, i, j) {
           data["teams"][i]["id"]
 
         if (typeof(data["teams"][i]["channels"][j]["check"]) == "number")
-          if (!data["teams"][i]["channels"][j]["check"]) {
-            # FIXME, move to index by channel code
-            Skip[data["teams"][i]["channels"][j]["label"]] = 1
-            SkipC[data["teams"][i]["channels"][j]["id"]] = 1
-          }
+          if (!data["teams"][i]["channels"][j]["check"]) 
+            Skip[ChanID[data["teams"][i]["channels"][j]["label"]]] = 1
+        
       }
     }
   }
@@ -450,92 +440,86 @@ function make_users(    cmd, json, data, name, i, j, redo) {
   exit 0
 }
 
-function ck_new(     status, i , cmd, label, newr, newp, newest, replies, \
-                     json, data, newestrep) {
+function ck_new(     status, i , cmd, label, newr, newp, newest_ts, threadrep, \
+                     json, data, newest_rep) {
 
-  RS="\x04";
   PROCINFO["sorted_in"] = "@ind_str_asc"
   printf "Checking:" 
   for (i in ChanID) {
-    if (Skip[i])
+    if (Skip[ChanID[i]])
       continue
     printf " %s", i 
     label[ChanID[i]] = i
     cmd = "curl -L -s "                                                 \
       "-H 'Authorization: Bearer " Token[ChanTeam[i]]  "' "             \
       "'https://slack.com/api/conversations.history?channel=" ChanID[i] "'"
-    cmd | getline json
-    if (! json_fromJSON(json, data)) {
-      print "JSON import failed!" > "/dev/stderr"
-      exit 1
-    }
-
+    api(cmd)
+    
     # find the ts of the newset post:
-    newest[ChanID[i]] = data["messages"][1]["ts"]
-    if (data["messages"][1]["reply_count"])
-      newestrep[ChanID[i]] = data["messages"][1]["reply_count"]
+    newest_ts[ChanID[i]] = Data["messages"][1]["ts"]
+    if (Data["messages"][1]["reply_count"])
+      newest_rep[ChanID[i]] = Data["messages"][1]["reply_count"]
     else
-      newestrep[ChanID[i]] = 0
+      newest_rep[ChanID[i]] = 0
     # for all posts in channel, make array of replies indexed by ts of post 
-    for (j in data["messages"]) { 
-      if (data["messages"][j]["reply_count"])
-        replies[ChanID[i]][data["messages"][j]["ts"]] = \
-          data["messages"][j]["reply_count"]
+    for (j in Data["messages"]) { 
+      if (Data["messages"][j]["reply_count"])
+        threadrep[ChanID[i]][Data["messages"][j]["ts"]] = \
+          Data["messages"][j]["reply_count"]
       else
-        replies[ChanID[i]][data["messages"][j]["ts"]] = 0
+        threadrep[ChanID[i]][Data["messages"][j]["ts"]] = 0
     }
   }
   printf "\n"
-  
+
   # test for latest.json
   "test -e " ENVIRON["HOME"] "/.config/slacka/latest.json ; echo $?"    \
     | getline status
+
   if (status) {
     print "Making initial " ENVIRON["HOME"] "/.config/slacka/latest.json"
-  }
-  else {
-    getline json < (ENVIRON["HOME"] "/.config/slacka/latest.json")
-    if (! json_fromJSON(json, data)) {
-      print "JSON import failed."
-      exit 1
+
+    for (i in newest_ts) {
+      Latest_ts[i] = newest_ts[i]
+      Latest_rep[i] = newest_rep[i]
     }
 
-    for (i in data) {
-      # is there either a new post, or a new reply to the last stored post
-      if (data[i]["ts"] < newest[data[i]["id"]])
-        newp[label[data[i]["id"]]]++
-      if (data[i]["replies"] < replies[data[i]["id"]][data[i]["ts"]])
-        newr[label[data[i]["id"]]]++
-    }
+    write_latest()
+    exit 1
+  }
+
+  # if latest.json exists, compare
+
+  read_latest()
+
+  for (i in Latest_ts) {
+    # check first for new replies to the (possibly) old thread
+    if (Latest_rep[i] < threadrep[i][Latest_ts[i]])
+      newr[label[i]]++
+
+    # now check for the latest thread
+    if (update_latest(i, newest_ts[i], newest_rep[i]) ~ /t/)  
+      newp[label[i]]++
+  }
     
-    if (isarray(newp)) {
-      printf "New posts: "
-      for (i in newp)
-        list = list " " i
-      printf "%s\n", list
-      list = ""
-    }
-    if (isarray(newr)) {
-      printf "New replies in: "
-      for (i in newr)
-        list = list " " i
-      printf "%s\n", list
-    }
-    if (!isarray(newr) && !isarray(newp))
-      print "No new posts/replies"
+  if (isarray(newp)) {
+    printf "New posts: "
+    for (i in newp)
+      list = list " " i
+    printf "%s\n", list
+    list = ""
   }
-
-  # for communication from slacka-notify
-  if (ENVIRON["SLACKA_READONLY"])
-    exit 0
+  if (isarray(newr)) {
+    # New replies to existing posts
+    printf "New replies in: "
+    for (i in newr)
+      list = list " " i
+    printf "%s\n", list
+  }
+  if (!isarray(newr) && !isarray(newp))
+    print "No new posts/replies"
   
-  # update latest.json
-  json = "["
-  for (i in newest)
-    json = json "{\"id\":\"" i "\",\"ts\":\"" newest[i] "\",\"replies\":\"" \
-      newestrep[i] "\"},"
-  gsub(/.$/,"]",json)
-  print json > (ENVIRON["HOME"] "/.config/slacka/latest.json")
+  write_latest()
 
   exit 0
 }
@@ -648,31 +632,122 @@ function api(cmd,     json) {
   
   RS="\x04";
   cmd | getline json
-  if (! json_fromJSON(json, Data))
-    error("JSON import failed!")
-  
-  if (!Data["ok"]) {
+  if (! json_fromJSON(json, Data)) {
     if (DEBUG)
       walk_array(Data, "Data")
+    
+    error("API JSON import failed!")
+  }
+
+  # walk_array(Data, "Data")
+
+  
+  if (!Data["ok"]) {
     return 1
   }
   else
     return 0
 }
 
-function read_latest(    status, json) {
+function read_latest(    status, json, data, i) {
   # test for latest.json
   
   "test -e " ENVIRON["HOME"] "/.config/slacka/latest.json ; echo $?"    \
     | getline status
   if (status)
     error("no latest.json file. Generate with slacka check")
-
+  
   RS="\x04";
-
   getline json < (ENVIRON["HOME"] "/.config/slacka/latest.json")
-  if (! json_fromJSON(json, Latest))
-    error("JSON import failed.")
+  if (! json_fromJSON(json, data))
+    error("latest.json import failed.")
 
+  for(i in data) {
+    Latest_ts[data[i]["id"]] = data[i]["ts"]
+    Latest_rep[data[i]["id"]] = data[i]["replies"]
+  }
 }
   
+function write_latest(    json, i) {
+  # for communication from slacka-notify
+  if (ENVIRON["SLACKA_READONLY"])
+    return
+
+  if (!isarray(Latest_ts))
+    error("array Latest_ts does not exist")
+  
+  if (DEBUG)
+    debug("writing to latest.json")
+  
+  json = "["
+  for (i in Latest_ts)
+    json = json "{\"id\":\"" i "\",\"ts\":\"" Latest_ts[i]  \
+      "\",\"replies\":\"" Latest_rep[i] "\"},"
+  gsub(/.$/,"]",json)
+  print json > (ENVIRON["HOME"] "/.config/slacka/latest.json")
+  
+}
+
+function print_usage(     mychans, i) {
+
+  print "Usage:\n  Maintenance: slacka auth  | cfg | users | \n"    \
+    "                       [ <channel> ] chans | newim <t> <u>"
+  print "  Check new:   slacka new"
+  print "  Read:        slacka <channel> [ <thread_id> ]    "
+  print "  Write:       slacka <channel> [ <thread_id> ] \"your message\""
+  print "  React:       slacka <channel> <thread_id> :<emoji>:"
+  " \"your message\""
+  print "  Search:      slacka <channel>  \"/search term/\""
+  mychans = "    My chans:"
+  PROCINFO["sorted_in"] = "@ind_str_asc"
+  for (i in ChanID)
+    mychans = mychans " " i
+  msg_block(mychans)
+  
+  exit 0
+}
+
+function update_latest(channel, threadid, threadrep,     i, updated) {
+  # compares Latest_ts and Latest_rep (for that ts) to threadid and
+  #   threadrep, updates, and returns an string consisting of 't' and 'r' 
+
+  if (!isarray(Latest_ts))
+    error("array Latest does not exist")
+
+  for (i in Latest_ts) {
+    # for the given channel
+    if (i == channel) {
+      # if a newer thread, update Latest
+      if (threadid > Latest_ts[i]) {
+        Latest_ts[i] = threadid
+        updated = updated "t"
+      }
+
+      # if add one to latest thread replies
+      if (threadrep ~ /^+1$/) {
+        Latest_rep[i]++
+        updated = updated "r"
+      }
+      # if new thread replies more than Latest_rep
+      else if (threadrep > Latest_rep[i]) {
+        Latest_rep[i] = threadrep
+        updated = updated "r"
+      }
+    }
+  }
+
+  if (DEBUG)
+    debug("updates on channel '" channel "': '" updated "'\n  (" \
+          Latest_ts[channel] " -> " threadid ")")
+
+  return updated
+}
+
+function debug(msg) {
+  print "DEBUG: " msg > "/dev/stderr"
+}
+
+function success(msg) {
+  print "Success: " msg > "/dev/stderr"
+}
+
