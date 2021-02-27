@@ -1,6 +1,6 @@
 # Slacka: lightweight CLI client for Slack (in Gawk)
 
-[**SCREENSHOTS**](doc/screenshots.md)
+[**SCREENSHOTS**](doc/screenshots.md) 
 
 ### Usage
 
