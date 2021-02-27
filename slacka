@@ -1,6 +1,6 @@
 #!/usr/bin/gawk -f
 
-# Slacka: an Awk (Gawk) client for Slack
+# Slacka: a simple client for Slack (in Awk)
 # https://github.com/camwebb/slacka
 # (c) Cam Webb <cw@camwebb.info>
 # License: The Unlicense <http://unlicense.org/>
@@ -19,6 +19,7 @@ BEGIN{
     system(editor " " ENVIRON["HOME"] "/.config/slacka/config.json &")
     exit 0
   }
+  
   else if ((ARGC == 2) && (ARGV[1] == "auth"))
     auth()
   
@@ -36,8 +37,9 @@ BEGIN{
     else if (!ChanID[ARGV[1]])
       error("no such channel label") 
     else
-      list_conv(ChanTeam[ARGV[1]], ChanID[ARGV[1]])
+      show_channel(ChanTeam[ARGV[1]], ChanID[ARGV[1]])
   }
+  
   else if (ARGC == 3) {
     # all two argument commands begin with channel
     if (!ChanID[ARGV[1]])
@@ -45,11 +47,11 @@ BEGIN{
     else if (ARGV[2] == "chans")
       list_channels(ChanTeam[ARGV[1]])
     else if (ARGV[2] ~ /^[0-9]+\.[0-9]+$/)
-      thread(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[2])
+      show_thread(ChanTeam[ARGV[1]], ChanID[ARGV[1]], ARGV[2])
     else if (ARGV[2] ~ /^\/[^/]+\/$/)
       find(ChanTeam[ARGV[1]], ChanID[ARGV[1]],
            gensub(/^\/([^/]+)\/$/,"\\1","G", ARGV[2]))
-    # attempt to post
+    # attempt to post to channel (new thread)
     else
       post(ChanTeam[ARGV[1]], ChanID[ARGV[1]], "new", ARGV[2])
   }
@@ -57,7 +59,8 @@ BEGIN{
   else if (ARGC == 4) {
     if (ARGV[1] == "newim")
       newim(ARGV[2], ARGV[3])
-    
+
+    # all else 3 arg commands start with channel and timestamp 
     else if (!ChanID[ARGV[1]])
       error("no such channel label")
     else if (ARGV[2] !~ /^[0-9]+\.[0-9]+$/)
@@ -75,24 +78,9 @@ BEGIN{
     print_usage()
 }
 
-function newim(team, users,      cmd) {
-  
-  if ((team !~ /^T[A-Z0-9]+$/) ||               \
-      (users !~ /^U[A-Z0-9,]+$/))
-    error("arg 2 must be: 'TXXXX' & arg 3: 'UXXXX[,UXXXX,...]'")
-  
-  cmd = "curl -L -s "                                                   \
-    "-H 'Authorization: Bearer " Token[team]  "' "                      \
-    "'https://slack.com/api/conversations.open?users=" users "'"
+# Main Methods --------------------------------------------------------------
 
-  if (api(cmd))
-    error("create new IM failed")
-
-  print "New IM channel: " Data["channel"]["id"]
-  exit 0
-}
-
-function react(team, channel, ts, rtype,      cmd) {
+function react(team, channel, ts, rtype,       cmd) {
   # https://github.com/iamcal/emoji-data -> emoji.json -> short_name
   # :smile: SMILING FACE WITH OPEN MOUTH AND SMILING EYES 😄
   # :+1:, :thumbsup: THUMBS UP SIGN 👍
@@ -153,7 +141,8 @@ function post(team, channel, ts, text,      cmd, status, updated) {
   exit 0
 }
 
-function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i, maxi, reactions) {
+function show_channel(team, channel,     cmd, json, data, date, name, plus, \
+                      msg, i, maxi, reactions) {
 
   read_users()
 
@@ -165,7 +154,7 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
     error("sending request failed")
   # walk_array(Data, "Data");
 
-  # number of posts to report (default 20)
+  # number of posts to report
   for (i in Data["messages"])
     maxi++
   if (maxi >= 10)
@@ -173,34 +162,15 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
   
   print ""
   for (i = maxi; i >= 1; i--) {
-    if (Name[Data["messages"][i]["user"]])
-      name = Name[Data["messages"][i]["user"]]
-    else
-      name = Data["messages"][i]["user"]
-    if (Data["messages"][i]["latest_reply"])
-      date = strftime("[%b-%d..",Data["messages"][i]["ts"])      \
-        strftime("%b-%d]", Data["messages"][i]["latest_reply"])
-    else
-      date = strftime("[%b-%d %H:%M]",Data["messages"][i]["ts"])
-    if (Data["messages"][i]["reply_count"])
-      plus = "\x1b[38;5;12m(+" Data["messages"][i]["reply_count"] ")\x1b[0;m"
-    else
-      plus = "(+0)"
-    
-    if (isarray(Data["messages"][i]["reactions"]))
-      reactions = "\x1b[38;5;10m{" length(Data["messages"][i]["reactions"]) \
-        "}\x1b[0;m"
-    else
-      reactions = "{0}"
 
-    # NB: apps (e.g., Element bidge) have no username TODO
-    print "\x1b[38;5;11m" "<" name "> " "\x1b[0;m" plus " " reactions " " date \
-      " ( " Data["messages"][i]["ts"] " )\n" 
-    msg = gensub(/\n/," // ", "G", Data["messages"][i]["text"])
-    msg_block(msg)
-    print ""
+    format_post( Data["messages"][i]["user"],                           \
+                 Data["messages"][i]["reply_count"],                    \
+                 length(Data["messages"][i]["reactions"]),              \
+                 Data["messages"][i]["ts"],                             \
+                 Data["messages"][i]["latest_reply"],                   \
+                 Data["messages"][i]["text"] )
   }
-
+  
   # update latest
   read_latest()
   if(update_latest(channel, Data["messages"][1]["ts"],  \
@@ -208,16 +178,16 @@ function list_conv(team, channel,     cmd, json, data, date, name, plus, msg, i,
     write_latest()
 }
 
-function thread(team, channel, ts,     name, cmd, json, data, msg, i, \
+function show_thread(team, channel, ts,     name, cmd, json, data, msg, i, \
                 reactions) {
 
   read_users()
   
-  cmd = "curl -L -s "                                               \
-    "-H 'Authorization: Bearer " Token[team]  "' "                        \
+  cmd = "curl -L -s "                                                   \
+    "-H 'Authorization: Bearer " Token[team]  "' "                      \
     "'https://slack.com/api/conversations.replies?channel=" channel "&"\
     "ts=" ts "'"
-  
+
   if (api(cmd))
     error("sending request failed")
   # walk_array(Data, "Data");
@@ -225,23 +195,14 @@ function thread(team, channel, ts,     name, cmd, json, data, msg, i, \
   print ""
   PROCINFO["sorted_in"] = "@ind_num_asc"
   for (i in Data["messages"]) {
-    if (Name[Data["messages"][i]["user"]])
-      name = Name[Data["messages"][i]["user"]]
-    else
-      name = Data["messages"][i]["user"]
 
-    if (isarray(Data["messages"][i]["reactions"]))
-      reactions = "\x1b[38;5;10m{" length(Data["messages"][i]["reactions"]) \
-        "}\x1b[0;m"
-    else
-      reactions = "{0}"
-
-    print "\x1b[38;5;11m" "<" name ">" "\x1b[0;m" " " reactions  " "   \
-      strftime("[%b-%d %a %H:%M] ", Data["messages"][i]["ts"])         \
-      " ( " Data["messages"][i]["ts"]  " )\n"
-    msg = gensub(/\n/," // ", "G", Data["messages"][i]["text"])
-    msg_block(msg)
-    print ""
+    format_post( Data["messages"][i]["user"],                           \
+                 "NA",                                                  \
+                 length(Data["messages"][i]["reactions"]),              \
+                 Data["messages"][i]["ts"],                             \
+                 Data["messages"][i]["ts"],                             \
+                 Data["messages"][i]["text"] )
+    # Note: ...["reply_count"] may be present for a thread reply
   }
 
   # update latest, but only if the ts matches
@@ -251,19 +212,124 @@ function thread(team, channel, ts,     name, cmd, json, data, msg, i, \
       write_latest()
 }
 
-function msg_block(msg,     j, lines, ec, bc, dash, width) {
-  width = 70
-  for (j in Name)   # names not in users.json are left as is
-    gsub(("<@" j ">"), ("<@" Name[j] ">"), msg)
-  lines = int((length(msg)-1) / width) + 1
-  for (j = 1; j <= lines; j++) {
-    ec = substr(msg,(j*width),1)
-    bc = substr(msg,(j*width)+1,1)
-    dash = (ec && (ec!=" ") && bc && (bc!=" ")) ? "-" : ""
-    print "    " gensub(/^ */,"","G",substr(msg,((j-1)*width)+1,width)) dash
+function find(team, channel, query,     cmd, i) {
+
+  read_users()
+  
+  cmd = "curl -s "                                                      \
+    "-H 'Authorization: Bearer " Token[team]  "' "         \
+    "'https://slack.com/api/search.messages?query=" query "'"
+
+  if(api(cmd))
+    error("find failed")
+  
+  PROCINFO["sorted_in"] = "@ind_num_desc"
+
+  if (!length(Data["messages"]["matches"])) {
+    print "No matches"
+    exit 0
+  }
+    
+  for (i in Data["messages"]["matches"]) {
+    if (Data["messages"]["matches"][i]["channel"]["id"] == channel) {
+      
+      format_post( Data["messages"]["matches"][i]["user"],              \
+                   "NA",                                                \
+                   "NA",                                                \
+                   Data["messages"]["matches"][i]["ts"],                \
+                   Data["messages"]["matches"][i]["ts"],                \
+                   Data["messages"]["matches"][i]["text"] )
+
+    }
   }
 }
 
+function ck_new(     status, i , cmd, label, newr, newp, newest_ts, threadrep,\
+                     json, data, newest_rep) {
+
+  PROCINFO["sorted_in"] = "@ind_str_asc"
+  printf "Checking:" 
+  for (i in ChanID) {
+    if (Skip[ChanID[i]])
+      continue
+    printf " %s", i 
+    label[ChanID[i]] = i
+    cmd = "curl -L -s "                                                 \
+      "-H 'Authorization: Bearer " Token[ChanTeam[i]]  "' "             \
+      "'https://slack.com/api/conversations.history?channel=" ChanID[i] "'"
+    api(cmd)
+    
+    # find the ts of the newset post:
+    newest_ts[ChanID[i]] = Data["messages"][1]["ts"]
+    if (Data["messages"][1]["reply_count"])
+      newest_rep[ChanID[i]] = Data["messages"][1]["reply_count"]
+    else
+      newest_rep[ChanID[i]] = 0
+    # for all posts in channel, make array of replies indexed by ts of post 
+    for (j in Data["messages"]) { 
+      if (Data["messages"][j]["reply_count"])
+        threadrep[ChanID[i]][Data["messages"][j]["ts"]] = \
+          Data["messages"][j]["reply_count"]
+      else
+        threadrep[ChanID[i]][Data["messages"][j]["ts"]] = 0
+    }
+  }
+  printf "\n"
+
+  # test for latest.json
+  "test -e " ENVIRON["HOME"] "/.config/slacka/latest.json ; echo $?"    \
+    | getline status
+
+  if (status) {
+    print "Making initial " ENVIRON["HOME"] "/.config/slacka/latest.json"
+
+    for (i in newest_ts) {
+      Latest_ts[i] = newest_ts[i]
+      Latest_rep[i] = newest_rep[i]
+    }
+
+    write_latest()
+    exit 0
+  }
+
+  # if latest.json exists, compare
+
+  read_latest()
+
+  for (i in Latest_ts) {
+    # check first for new replies to the (possibly) old thread
+    if (Latest_rep[i] < threadrep[i][Latest_ts[i]])
+      newr[label[i]]++
+
+    # now check for the latest thread
+    if (update_latest(i, newest_ts[i], newest_rep[i]) ~ /t/)  
+      newp[label[i]]++
+  }
+    
+  if (isarray(newp)) {
+    printf "New posts: "
+    for (i in newp)
+      list = list " " i
+    printf "%s\n", list
+    list = ""
+  }
+  if (isarray(newr)) {
+    # New replies to existing posts
+    printf "New replies in: "
+    for (i in newr)
+      list = list " " i
+    printf "%s\n", list
+  }
+  if (!isarray(newr) && !isarray(newp))
+    print "No new posts/replies"
+  
+  write_latest()
+
+  exit 0
+}
+
+# Admin methods ------------------------------------------------------------
+ 
 function list_channels(channel,     cmd, json, data, i, c, C) {
   PROCINFO["sorted_in"] = "@ind_num_asc"
 
@@ -276,66 +342,112 @@ function list_channels(channel,     cmd, json, data, i, c, C) {
       C[i] = 1
   
   for (c in C) {
+
     cmd = "curl -L -s -H 'Authorization: Bearer " Token[c]  \
       "' 'https://slack.com/api/conversations.list"         \
       "?types=public_channel,private_channel,im,mpim'"
-    RS="\x04";
-    cmd | getline json
-    if (! json_fromJSON(json, data)) {
-      print "JSON import failed!" > "/dev/stderr"
-      exit 1
-    }
-    # walk_array(data, "data");
+
+    api(cmd)
+    # walk_array(Data, "Data");
 
     print "TEAM: " TName[c] " (" c ")\n"  
-    for (i in data["channels"]) {
+    for (i in Data["channels"]) {
       
       
-      if (data["channels"][i]["is_im"]) {
-        if (Name[data["channels"][i]["user"]])
-          name = Name[data["channels"][i]["user"]]
-        else if (data[channels][30][name])
-          name = data["channels"][i]["user"]
-        printf "  %-12s : IM with: %-40s\n", data["channels"][i]["id"], name
+      if (Data["channels"][i]["is_im"]) {
+        if (Name[Data["channels"][i]["user"]])
+          name = Name[Data["channels"][i]["user"]]
+        else if (Data[channels][30][name])
+          name = Data["channels"][i]["user"]
+        printf "  %-12s : IM with: %-40s\n", Data["channels"][i]["id"], name
       }
-      else if (data["channels"][i]["is_mpim"])
-        printf "  %-12s : MPIM: %-50s\n", data["channels"][i]["id"], \
-          data["channels"][i]["name"]
-      else if (data["channels"][i]["is_channel"])
-        printf "  %-12s : %-50s (priv=%s)\n", data["channels"][i]["id"], \
-          data["channels"][i]["name"] , data["channels"][i]["is_private"]
+      else if (Data["channels"][i]["is_mpim"])
+        printf "  %-12s : MPIM: %-50s\n", Data["channels"][i]["id"], \
+          Data["channels"][i]["name"]
+      else if (Data["channels"][i]["is_channel"])
+        printf "  %-12s : %-50s (priv=%s)\n", Data["channels"][i]["id"], \
+          Data["channels"][i]["name"] , Data["channels"][i]["is_private"]
     }
     print ""
   }
   exit 0
 }
 
-function team_names(team,   cmd, json, data) {
-  cmd = "curl -L -s -H 'Authorization: Bearer " Token[team]   \
-    "' 'https://slack.com/api/users.list?team_id=" team "'"
-  RS="\x04";
-  cmd | getline json
-  if (! json_fromJSON(json, data)) {
-    print "JSON import failed!" > "/dev/stderr"
-    exit 1
+function make_users(    cmd, json, data, name, i, j, redo) {
+  for (i in Token) {
+    printf "  %s " , TName[i]
+    redo = 1
+    while (redo) {
+      cmd = "curl -L -s -H 'Authorization: Bearer " Token[i]    \
+        "' 'https://slack.com/api/users.list?team_id=" i "&limit=1000"
+      if (Data["response_metadata"]["next_cursor"])
+        cmd = cmd "&cursor=" Data["response_metadata"]["next_cursor"]
+      cmd = cmd "'"
+
+      if(!api(cmd))
+        printf "OK "
+    
+      for (j in Data["members"])
+        name[Data["members"][j]["id"]] =                        \
+          Data["members"][j]["profile"]["real_name_normalized"]
+      
+      if (!Data["response_metadata"]["next_cursor"])
+        # do not need another page
+        redo = 0
+    }
+    printf "\n"
   }
-  
-  for (i in data["members"])
-    Name[data["members"][i]["id"]] = \
-      data["members"][i]["profile"]["real_name_normalized"]
 }
 
-function walk_array(arr, name,      i, s) {
-  for (i in arr) {
-    if (isarray(arr[i]))
-      walk_array(arr[i], (name "[" i "]"))
-    else {
-      # printf("%s[%s] = %s\n", name, i, arr[i])
-      s = sprintf("%s[%s] = %s", name, i, arr[i])
-      print gensub(/\[([^0-9][^]]*)\]/,"[\"\\1\"]","G",s)
-    }
-  }
+function newim(team, users,      cmd) {
+  
+  if ((team !~ /^T[A-Z0-9]+$/) ||               \
+      (users !~ /^U[A-Z0-9,]+$/))
+    error("arg 2 must be: 'TXXXX' & arg 3: 'UXXXX[,UXXXX,...]'")
+  
+  cmd = "curl -L -s "                                                   \
+    "-H 'Authorization: Bearer " Token[team]  "' "                      \
+    "'https://slack.com/api/conversations.open?users=" users "'"
+
+  if (api(cmd))
+    error("create new IM failed")
+
+  success("new IM channel: " Data["channel"]["id"])
+  exit 0
 }
+
+
+function auth(   cmd) {
+
+  # App setup (2021-02-19):
+  #   1. Create app in a workspace, copy client ID and client secret 
+  #   2. Add permissions -(see below)
+  #   3. Add dummy redirect URL (e.g., https://example.com/path ), or webapp
+  #      (https://camwebb.info/cgi/slackatoken)
+  #   4. Confirm hardcode review
+  #   5. Distribute
+  # App can now be used in any authorized workspace
+
+  # See: https://github.com/wee-slack/wee-slack/wee_slack.py
+  #      https://github.com/erroneousboat/slack-term/wiki
+  
+  clientid       = "234851842290.1757541358103"
+  
+  print "In your browser, log in to a Slack workspace, then go to this URL:" \
+    "\n\n   https://slack.com/oauth/v2/authorize?"                      \
+    "client_id=" clientid "&user_scope="                                \
+    "channels:history,channels:read,groups:history,groups:read,"        \
+    "users:read,chat:write,search:read,reactions:write,"                \
+    "im:read,im:history,im:write,"                                      \
+    "mpim:read,mpim:history,mpim:write\n"
+  print "After authorizing a workspace, you will be redirected to to a"
+  print "  webapp that will display your token. If the webapp is not working"
+  print "  see https://github.com/camwebb/slacka for other methods."
+
+  exit 0
+}
+
+# Submethods ---------------------------------------------------------------
 
 function config(    json, data, i, j) {
   RS="\x04";
@@ -394,261 +506,6 @@ function read_users(    json, data, i) {
     Name[data[i]["id"]] = data[i]["name"]
 }
 
-function make_users(    cmd, json, data, name, i, j, redo) {
-  for (i in Token) {
-    printf "  %s " , TName[i]
-    redo = 1
-    while (redo) {
-      cmd = "curl -L -s -H 'Authorization: Bearer " Token[i]    \
-        "' 'https://slack.com/api/users.list?team_id=" i "&limit=1000"
-      if (data["response_metadata"]["next_cursor"])
-        cmd = cmd "&cursor=" data["response_metadata"]["next_cursor"]
-      cmd = cmd "'"
-      RS="\x04";
-      cmd | getline json
-      if (! json_fromJSON(json, data)) {
-        print "JSON import failed!" > "/dev/stderr"
-        exit 1
-      }
-      
-      if (!data["ok"] == 1) {
-        print "Reading failed"
-        exit 1
-      }
-      else
-        printf "OK "
-    
-      for (j in data["members"])
-        name[data["members"][j]["id"]] =                        \
-          data["members"][j]["profile"]["real_name_normalized"]
-      
-      if (!data["response_metadata"]["next_cursor"])
-        # do not need another page
-        redo = 0
-    }
-    printf "\n"
-  }
-  
-  # Todo: check for directory
-  json = "["
-  for (i in name)
-    json = json "{\"id\":\"" i "\",\"name\":\"" name[i] "\"},"
-  json = substr(json,1,length(json)-1) "]"
-  print json > (ENVIRON["HOME"] "/.config/slacka/users.json")
-  print "Users updated successfully"
-
-  exit 0
-}
-
-function ck_new(     status, i , cmd, label, newr, newp, newest_ts, threadrep, \
-                     json, data, newest_rep) {
-
-  PROCINFO["sorted_in"] = "@ind_str_asc"
-  printf "Checking:" 
-  for (i in ChanID) {
-    if (Skip[ChanID[i]])
-      continue
-    printf " %s", i 
-    label[ChanID[i]] = i
-    cmd = "curl -L -s "                                                 \
-      "-H 'Authorization: Bearer " Token[ChanTeam[i]]  "' "             \
-      "'https://slack.com/api/conversations.history?channel=" ChanID[i] "'"
-    api(cmd)
-    
-    # find the ts of the newset post:
-    newest_ts[ChanID[i]] = Data["messages"][1]["ts"]
-    if (Data["messages"][1]["reply_count"])
-      newest_rep[ChanID[i]] = Data["messages"][1]["reply_count"]
-    else
-      newest_rep[ChanID[i]] = 0
-    # for all posts in channel, make array of replies indexed by ts of post 
-    for (j in Data["messages"]) { 
-      if (Data["messages"][j]["reply_count"])
-        threadrep[ChanID[i]][Data["messages"][j]["ts"]] = \
-          Data["messages"][j]["reply_count"]
-      else
-        threadrep[ChanID[i]][Data["messages"][j]["ts"]] = 0
-    }
-  }
-  printf "\n"
-
-  # test for latest.json
-  "test -e " ENVIRON["HOME"] "/.config/slacka/latest.json ; echo $?"    \
-    | getline status
-
-  if (status) {
-    print "Making initial " ENVIRON["HOME"] "/.config/slacka/latest.json"
-
-    for (i in newest_ts) {
-      Latest_ts[i] = newest_ts[i]
-      Latest_rep[i] = newest_rep[i]
-    }
-
-    write_latest()
-    exit 1
-  }
-
-  # if latest.json exists, compare
-
-  read_latest()
-
-  for (i in Latest_ts) {
-    # check first for new replies to the (possibly) old thread
-    if (Latest_rep[i] < threadrep[i][Latest_ts[i]])
-      newr[label[i]]++
-
-    # now check for the latest thread
-    if (update_latest(i, newest_ts[i], newest_rep[i]) ~ /t/)  
-      newp[label[i]]++
-  }
-    
-  if (isarray(newp)) {
-    printf "New posts: "
-    for (i in newp)
-      list = list " " i
-    printf "%s\n", list
-    list = ""
-  }
-  if (isarray(newr)) {
-    # New replies to existing posts
-    printf "New replies in: "
-    for (i in newr)
-      list = list " " i
-    printf "%s\n", list
-  }
-  if (!isarray(newr) && !isarray(newp))
-    print "No new posts/replies"
-  
-  write_latest()
-
-  exit 0
-}
-
-function auth(   cmd) {
-
-  # App setup (2021-02-19):
-  #   1. Create app in a workspace, copy client ID and client secret 
-  #   2. Add permissions -(see below)
-  #   3. Add dummy redirect URL (e.g., https://example.com/path ), or webapp
-  #      (https://camwebb.info/cgi/slackatoken)
-  #   4. Confirm hardcode review
-  #   5. Distribute
-  # App can now be used in any authorized workspace
-
-  # See: https://github.com/wee-slack/wee-slack/wee_slack.py
-  #      https://github.com/erroneousboat/slack-term/wiki
-  
-  clientid       = "234851842290.1757541358103"
-  
-  print "In your browser, log in to a Slack workspace, then go to this URL:" \
-    "\n\n   https://slack.com/oauth/v2/authorize?"                      \
-    "client_id=" clientid "&user_scope="                                \
-    "channels:history,channels:read,groups:history,groups:read,"        \
-    "users:read,chat:write,search:read,reactions:write,"                \
-    "im:read,im:history,im:write,"                                      \
-    "mpim:read,mpim:history,mpim:write\n"
-  print "After authorizing a workspace, you will be redirected to to a"
-  print "  webapp that will display your token. If the webapp is not working"
-  print "  see https://github.com/camwebb/slacka for other methods."
-
-  # print "After authorizing a workspace, examine the URL in the redirect, and"  
-  # print "paste the code string after 'code=' and before '&state='"
-  # printf " : "
-  # RS="\n";
-  # getline code < "-"
-
-  # RS="\x04";
-  # cmd = "curl -s "                                                      \
-  #   "'https://slack.com/api/oauth.v2.access?code=" code                 \
-  #   "&client_id=" clientid                                              \
-  #   "&client_secret=" clientsecret   "'"
-  # cmd | getline json
-  # if (! json_fromJSON(json, data)) {
-  #   print "JSON import failed!" > "/dev/stderr"
-  #   exit 1
-  # }
-
-  # if (!data["ok"] == "true") {
-  #   print "Authorization failed."
-  #   exit 1
-  # }
-  
-  # print "\nNow enter JSON into the slacka config.json file, below team:"
-  # print "{"
-  # print "  \"id\"    : \"" data["team"]["id"] "\","
-  # print "  \"name\"  : \"" data["team"]["name"] "\","
-  # print "  \"token\" : \"" data["authed_user"]["access_token"] "\","
-  # print "  \"channels\" :"
-  # print "  ["
-  # print "    {"
-  # print "      \"label\" :  \"foo\","
-  # print "      \"name\"  :  \"Dummy\","
-  # print "      \"id\"    :  \"CXXXXXX\""
-  # print "    }"
-  # print "  ]"
-  # print "}"
-
-  exit 0
-}
-
-function find(team, channel, query,     cmd, json, data) {
-
-  read_users()
-  
-  RS="\x04";
-  cmd = "curl -s "                                                      \
-    "-H 'Authorization: Bearer " Token[team]  "' "         \
-    "'https://slack.com/api/search.messages?query=" query "'" 
-  cmd | getline json
-  if (! json_fromJSON(json, data)) {
-    print "JSON import failed!" > "/dev/stderr"
-    exit 1
-  }
-
-  PROCINFO["sorted_in"] = "@ind_num_desc"
-  for (i in data["messages"]["matches"]) {
-    if (data["messages"]["matches"][i]["channel"]["id"] == channel) {
-      
-      if (Name[data["messages"]["matches"][i]["user"]])
-        name = Name[data["messages"]["matches"][i]["user"]]
-      else
-        name = data["messages"]["matches"][i]["user"]
-      print "\x1b[38;5;11m" "<" name "> " "\x1b[0;m"                \
-        strftime("[%b-%d %a %H:%M] ",data["messages"]["matches"][i]["ts"]) \
-        " ( " data["messages"]["matches"][i]["ts"] " )\n" 
-      msg = gensub(/\n/," // ", "G", data["messages"]["matches"][i]["text"])
-      msg_block(msg)
-      print ""
-    }
-  }
-}
-  
-function error(msg) {
-  print "Error: " msg > "/dev/stderr"
-  exit 1
-}
-
-function api(cmd,     json) {
-  
-  RS="\x04";
-  cmd | getline json
-  if (! json_fromJSON(json, Data)) {
-    if (DEBUG)
-      walk_array(Data, "Data")
-    
-    error("API JSON import failed!")
-  }
-
-  # walk_array(Data, "Data")
-
-  
-  if (!Data["ok"]) {
-    return 1
-  }
-  else
-    return 0
-}
-
 function read_latest(    status, json, data, i) {
   # test for latest.json
   
@@ -690,15 +547,15 @@ function write_latest(    json, i) {
 
 function print_usage(     mychans, i) {
 
-  print "Usage:\n  Maintenance: slacka               auth | cfg | users"\
+  print "Usage:\n  Maintenance: slacka                  auth | cfg | users"\
     " | newim <t> <u>"
-  print "  List chans:  slacka [ <channel> ] chans" 
-  print "  Check new:   slacka               new"
-  print "  Read:        slacka   <channel> [ <thread_id> ] "
-  print "  Write:       slacka   <channel> [ <thread_id> ] \"your message\""
-  print "  React:       slacka   <channel>   <thread_id>   :<emoji>:"
+  print "  List chans:  slacka [ <channel> ]    chans" 
+  print "  Check new:   slacka                  new"
+  print "  Read:        slacka   <channel>   [ <thread_id> ] "
+  print "  Write:       slacka   <channel>   [ <thread_id> ] \"your message\""
+  print "  React:       slacka   <channel>     <thread_id>   :<emoji>:"
   " \"your message\""
-  print "  Search:      slacka   <channel>                 \"/search term/\""
+  print "  Search:      slacka   <channel>                   \"/search term/\""
   mychans = "    My chans:"
   PROCINFO["sorted_in"] = "@ind_str_asc"
   for (i in ChanID)
@@ -744,6 +601,46 @@ function update_latest(channel, threadid, threadrep,     i, updated) {
   return updated
 }
 
+function api(cmd,     json) {
+  
+  RS="\x04";
+  cmd | getline json
+  if (! json_fromJSON(json, Data)) {
+    if (DEBUG)
+      walk_array(Data, "Data")
+    
+    error("API JSON import failed!")
+  }
+
+  # walk_array(Data, "Data")
+
+  
+  if (!Data["ok"]) {
+    return 1
+  }
+  else
+    return 0
+}
+
+# Support functions --------------------------------------------------------
+
+function walk_array(arr, name,      i, s) {
+  for (i in arr) {
+    if (isarray(arr[i]))
+      walk_array(arr[i], (name "[" i "]"))
+    else {
+      # printf("%s[%s] = %s\n", name, i, arr[i])
+      s = sprintf("%s[%s] = %s", name, i, arr[i])
+      print gensub(/\[([^0-9][^]]*)\]/,"[\"\\1\"]","G",s)
+    }
+  }
+}
+
+function error(msg) {
+  print "Error: " msg > "/dev/stderr"
+  exit 1
+}
+
 function debug(msg) {
   print "DEBUG: " msg > "/dev/stderr"
 }
@@ -752,3 +649,60 @@ function success(msg) {
   print "Success: " msg > "/dev/stderr"
 }
 
+function msg_block(msg,     j, lines, ec, bc, dash, width) {
+  width = 70
+  for (j in Name)   # names not in users.json are left as is
+    gsub(("<@" j ">"), ("<@" Name[j] ">"), msg)
+  lines = int((length(msg)-1) / width) + 1
+  for (j = 1; j <= lines; j++) {
+    ec = substr(msg,(j*width),1)
+    bc = substr(msg,(j*width)+1,1)
+    dash = (ec && (ec!=" ") && bc && (bc!=" ")) ? "-" : ""
+    print "    " gensub(/^ */,"","G",substr(msg,((j-1)*width)+1,width)) dash
+  }
+}
+
+function format_post(userid, replies, reactions, threadid, latestts, text, \
+                     name, date, reps, reacts, ts, msg) {
+
+  name = reps = date = reacts = ts = msg = "" 
+  if (Name[userid])
+    name =  "\x1b[38;5;11m<" Name[userid] ">\x1b[0;m"
+  else
+    name = "\x1b[38;5;11m<" userid ">\x1b[0;m"
+  # NB: apps (e.g., Element bidge) have no username TODO
+
+  if (replies == "NA")
+    reps = ""
+  else if (replies)
+    reps = "\x1b[38;5;12m(+" replies ")\x1b[0;m "
+  else
+    reps = "(+0) "
+
+  if (reactions == "NA")
+    reacts = ""
+  else if (reactions)
+    reacts = "\x1b[38;5;10m{" reactions "}\x1b[0;m "
+  else
+    reacts = "{0} "
+
+  if (latestts) {
+    if (threadid != latestts)
+      date = strftime("[%b-%d - " , threadid) strftime("%b-%d]", latestts)
+    else {
+      date = strftime("[%b-%d %H:%M]", threadid)
+    }
+  }
+  else
+    date = strftime("[%b-%d %H:%M]", threadid)
+  
+  msg = gensub(/\n/," // ", "G", text)
+  
+  print name " "                                                  \
+    reps                                                          \
+    reacts                                                        \
+    date " "                                                      \
+    "( " threadid " )\n"
+  msg_block(msg)
+  print ""
+}

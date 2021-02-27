@@ -87,13 +87,13 @@ workspaces) are:
 ### Usage
 
 ```
-  Maintenance: slacka               auth | cfg | users | newim <t> <u>
-  List chans:  slacka [ <channel> ] chans
-  Check new:   slacka               new
-  Read:        slacka   <channel> [ <thread_id> ] 
-  Write:       slacka   <channel> [ <thread_id> ] "your message"
-  React:       slacka   <channel>   <thread_id>   :<emoji>:
-  Search:      slacka   <channel>                 "/search term/"
+  Maintenance: slacka                  auth | cfg | users | newim <t> <u>
+  List chans:  slacka [ <channel> ]    chans
+  Check new:   slacka                  new
+  Read:        slacka   <channel>   [ <thread_id> ] 
+  Write:       slacka   <channel>   [ <thread_id> ] "your message"
+  React:       slacka   <channel>     <thread_id>   :<emoji>:
+  Search:      slacka   <channel>                   "/search term/"
     My chans: ...
 ```
 
@@ -120,4 +120,11 @@ workspaces) are:
  * To react: `slacka <channel> <thread_id> :<emoji>:`, where `<emoji>`
    is the standard emoji [`short_name`](emojis.txt)
 
+## Privacy policy
 
+This app runs as an independent program on your computer and gives no
+access to other users. The `auth` method uses a registered App’s
+`client_secret` to authorize the app for your workspaces via a webapp
+and provie you with an OAuth token; the webapp does not store this
+OAuth token.  Other methods for obtaining an OAuth token exist (see
+above).
