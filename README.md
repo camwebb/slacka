@@ -139,6 +139,12 @@ Use `slacka init` or create manually:
    config file.  The `label` is your shortcut for that channel. Labels
    must be unique across all teams.
 
+### slacka-notify
+
+The included `slacka-notify` can be run in a cron job to run `slacka
+new` on a regular basis. It will trigger a desktop notification, via
+`notify-send`. Read file header for more info.
+
 ## Privacy policy
 
 This app runs as an independent program on your computer and gives no
