@@ -760,3 +760,8 @@ function format_post(userid, replies, reactions, threadid, latestts, text, \
   msg_block(msg)
   print ""
 }
+
+# NB: this is needed for compatibility with gawk-json v2+
+function json_fromJSON(input_string, output_array) {
+  return json::from_json(input_string, output_array)
+}
