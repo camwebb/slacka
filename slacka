@@ -22,6 +22,8 @@ BEGIN{
   
   else if ((ARGC == 2) && (ARGV[1] == "auth"))
     auth()
+  else if ((ARGC == 2) && (ARGV[1] == "init"))
+    init()
   
   config()
 
@@ -378,7 +380,7 @@ function make_users(    cmd, json, data, name, i, j, redo) {
     printf "  %s " , TName[i]
     redo = 1
     while (redo) {
-      cmd = "curl -L -s -H 'Authorization: Bearer " Token[i]    \
+      cmd = "curl -L -s -H 'Authorization: Bearer " Token[i]            \
         "' 'https://slack.com/api/users.list?team_id=" i "&limit=1000"
       if (Data["response_metadata"]["next_cursor"])
         cmd = cmd "&cursor=" Data["response_metadata"]["next_cursor"]
@@ -397,6 +399,20 @@ function make_users(    cmd, json, data, name, i, j, redo) {
     }
     printf "\n"
   }
+
+  "test -d " ENVIRON["HOME"] "/.config/slacka ; echo $?"    \
+    | getline status
+  if (status)
+    error("directory '" ENVIRON["HOME"] "/.config/slacka/' does not exist")
+  
+  json = "["
+  for (i in name)
+    json = json "{\"id\":\"" i "\",\"name\":\"" name[i] "\"},"
+  json = substr(json,1,length(json)-1) "]"
+  print json > (ENVIRON["HOME"] "/.config/slacka/users.json")
+  success("users.json updated successfully")
+  exit 0
+  
 }
 
 function newim(team, users,      cmd) {
@@ -512,7 +528,7 @@ function read_latest(    status, json, data, i) {
   "test -e " ENVIRON["HOME"] "/.config/slacka/latest.json ; echo $?"    \
     | getline status
   if (status)
-    error("no latest.json file. Generate with slacka check")
+    error("no latest.json file. Generate with 'slacka new'")
   
   RS="\x04";
   getline json < (ENVIRON["HOME"] "/.config/slacka/latest.json")
@@ -547,14 +563,13 @@ function write_latest(    json, i) {
 
 function print_usage(     mychans, i) {
 
-  print "Usage:\n  Maintenance: slacka                  auth | cfg | users"\
-    " | newim <t> <u>"
+  print "Usage:\n  Maintenance: slacka                  init | auth | cfg | "\
+    "users\n  New IM:      slacka                  newim <teamID> <userID>"
   print "  List chans:  slacka [ <channel> ]    chans" 
   print "  Check new:   slacka                  new"
   print "  Read:        slacka   <channel>   [ <thread_id> ] "
   print "  Write:       slacka   <channel>   [ <thread_id> ] \"your message\""
   print "  React:       slacka   <channel>     <thread_id>   :<emoji>:"
-  " \"your message\""
   print "  Search:      slacka   <channel>                   \"/search term/\""
   mychans = "    My chans:"
   PROCINFO["sorted_in"] = "@ind_str_asc"
@@ -621,6 +636,45 @@ function api(cmd,     json) {
   else
     return 0
 }
+
+function init(    status) {
+
+  "test -d " ENVIRON["HOME"] "/.config/slacka ; echo $?"    \
+    | getline status
+  if (status) {
+    if(system("mkdir -p " ENVIRON["HOME"] "/.config/slacka"))
+      error("could not make directory '" ENVIRON["HOME"] "/.config/slacka'")
+    else
+      success("created directory '" ENVIRON["HOME"] "/.config/slacka'")
+  }
+  else
+    print "Directory '" ENVIRON["HOME"] "/.config/slacka' exists"   \
+      > "/dev/stderr"
+  
+  "test -f " ENVIRON["HOME"] "/.config/slacka/config.json ; echo $?"    \
+    | getline status
+  if (status) {
+    print "{\n  \"teams\" :\n    [\n      {\n        "                  \
+      "\"id\"  : \"TXXXX1\",\n        \"name\" : \"First team\",\n" \
+      "        \"token\" : \"xoxp-...\",\n        "                     \
+      "\"channels\" :\n          [\n            {\n"                    \
+      "              \"label\" :  \"c1\",\n              \"name\"  :  " \
+      "\"First Channel\",\n"                                            \
+      "              \"id\" : \"CXXXX1\"\n            }\n          ]\n"\
+      "      }\n    ]\n}" > ENVIRON["HOME"] "/.config/slacka/config.json"
+    success("dummy config file '~/.config/slacka/config.json' created.\n  "\
+            "Now, 1) run 'slacka auth' to get team ID and auth token,\n"\
+            "       2) edit config.json with 'slacka cfg'\n"            \
+            "       3) run 'slacka users' to read user names\n"         \
+            "       4) run 'slacka chans' and edit, to add some channels\n" \
+            "       5) run 'slacka new' to create latest.json")
+    exit 0
+  }
+  else
+    error("config file '~/.config/slacka/config.json' exists")
+  
+}
+
 
 # Support functions --------------------------------------------------------
 

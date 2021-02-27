@@ -2,6 +2,58 @@
 
 [**SCREENSHOTS**](doc/screenshots.md)
 
+### Usage
+
+```
+  Maintenance: slacka                  init | auth | cfg | users
+  New IM:      slacka                  newim <teamID> <userID>
+  List chans:  slacka [ <channel> ]    chans
+  Check new:   slacka                  new
+  Read:        slacka   <channel>   [ <thread_id> ] 
+  Write:       slacka   <channel>   [ <thread_id> ] "your message"
+  React:       slacka   <channel>     <thread_id>   :<emoji>:
+  Search:      slacka   <channel>                   "/search term/"
+    My chans: ...
+```
+
+**Setup**:
+
+ 1. First, run `slacka init` to create the config directory and dummy config
+    file (`~/.config/slacka/config.json`)
+ 2. Run `slacka auth` to get team ID and auth token (see OAuth Tokens, below)
+ 3. Edit `config.json` with `slacka cfg`, adding the team and token
+ 4. Run `slacka users` to read user names for the team. This caches
+    the users’ real names for their user IDs (for all teams) in
+    `users.json`. If you later see that some (new) users in a team are
+    appearing as `<UXXXXX>` re-run `slacka users` to regenerate the
+    cache.
+ 5. Run `slacka chans` and edit `config.json` with `slacka cfg`, to
+    add some channels. Note: DMs are treated just as other channels
+    (`DXXX` and `GXXX`).
+ 6. Run `slacka new` to create `latest.json`
+
+**Use**:
+
+ * Plain `slacka` will give you help/usage and a list of available
+   channels.
+ * To see the ten most recent threads in a channel/DM, and the initial
+   post: `slacka <channel>`
+ * To read all replies in a thread: `slacka <channel> <thread_id>`,
+   where `<thread_id>` is the numeric code in the status line for each
+   thread (actually a time stamp).
+ * To post a new message to the channel (and to the DM): `slacka
+   <channel> "your message"`
+ * To post a message to a thread: `slacka <channel> <thread_id> "your
+   message"` (e.g.: `slacka news 1610131196.000800 "I agree!"`)
+ * To check for new posts in the channel/DM, or new replies to the most
+   recent post: `slacka new`.
+ * To search in a channel: `slacka <channel> "/query terms/"`
+ * To react: `slacka <channel> <thread_id> :<emoji>:`, where `<emoji>`
+   is the standard emoji [`short_name`](emojis.txt)
+
+Frequent updates to `config.json` are needed in general use, adding
+DMs, channels, new teams, etc.
+
 ## Installation
 
 ### Dependencies
@@ -52,6 +104,7 @@ single workspace:
     * `users:read` (see user names)
     * `chat:write` (for posting)
     * `search:read` (search)
+    * `reactions:write` (reactions)
     * `{im & mpim}:{read & history & write}` (for DMs)
  * ‘Install to Workspace’. Note that the Admins for your Workspace may
    have restricted users ability to add Apps, in which case you’ll
@@ -71,6 +124,8 @@ workspaces) are:
 
 ### Config file
 
+Use `slacka init` or create manually:
+
  * Create a directory `~/.config/slacka/`
  * Using the included [`config.json`](config.json) as a guide, create
    a minimal config file at `~/.config/slacka/config.json`. You’ll
@@ -84,47 +139,11 @@ workspaces) are:
    config file.  The `label` is your shortcut for that channel. Labels
    must be unique across all teams.
 
-### Usage
-
-```
-  Maintenance: slacka                  auth | cfg | users | newim <t> <u>
-  List chans:  slacka [ <channel> ]    chans
-  Check new:   slacka                  new
-  Read:        slacka   <channel>   [ <thread_id> ] 
-  Write:       slacka   <channel>   [ <thread_id> ] "your message"
-  React:       slacka   <channel>     <thread_id>   :<emoji>:
-  Search:      slacka   <channel>                   "/search term/"
-    My chans: ...
-```
-
- * First generate the `~/.config/slacka/users.json` file with `slacka
-   users`. This caches the users’ real names for their user IDs (for
-   all teams). If you later see that some (new) users in a team are
-   appearing as `<UXXXXX>` re-run `slacka users` to regenerate the
-   cache.
- * Plain `slacka` will give you usage and a list of available
-   channels. Add these channel IDs to the config file. Note: DMs are
-   treated just as other channels (`DXXX` and `GXXX`).
- * To see the ten most recent threads in a channel/DM, and the initial
-   post: `slacka <channel>`
- * To read all replies in a thread: `slacka <channel> <thread_id>`,
-   where `<thread_id>` is the numeric code in the heading for each
-   thread (actually a time stamp).
- * To post a new message to the channel (and to the DM): `slacka
-   <channel> "your message"`
- * To post a message to a thread: `slacka <channel> <thread_id> "your
-   message"` (e.g.: `slacka news 1610131196.000800 "I agree!"`)
- * To check for new posts in the channel/DM, or new replies to the most
-   recent post: `slacka new`.
- * To search in a channel: `slacka <channel> "/query terms/"`
- * To react: `slacka <channel> <thread_id> :<emoji>:`, where `<emoji>`
-   is the standard emoji [`short_name`](emojis.txt)
-
 ## Privacy policy
 
 This app runs as an independent program on your computer and gives no
 access to other users. The `auth` method uses a registered App’s
 `client_secret` to authorize the app for your workspaces via a webapp
-and provie you with an OAuth token; the webapp does not store this
+and provide you with an OAuth token; the webapp does not store this
 OAuth token.  Other methods for obtaining an OAuth token exist (see
 above).
